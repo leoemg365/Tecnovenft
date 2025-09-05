@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formatos Tecnoven</title>
+  <style>
+    :root{
+      --vino:#4b0e20;
+      --vino-2:#6d1433;
+      --card:#ffffff;
+      --ink:#111;
+      --muted:#f6f6f6;
+      --accent:#ffb300;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:linear-gradient(160deg, var(--vino), #2a0a14 60%);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px;
+    }
+    .card{
+      width:100%;
+      max-width:560px;
+      background:var(--card);
+      color:var(--ink);
+      border-radius:16px;
+      box-shadow:0 8px 28px rgba(0,0,0,.4);
+      padding:18px;
+    }
+    h2{text-align:center;color:var(--vino);margin-top:0}
+    label{display:block;font-weight:700;margin-top:10px}
+    input,select,textarea,button{
+      width:100%;padding:10px;margin-top:4px;font-size:16px;
+      border:1px solid #ddd;border-radius:8px
+    }
+    textarea{min-height:70px;resize:vertical}
+    .row{display:flex;gap:8px;align-items:center}
+    .row input{flex:3}
+    .row button{flex:1}
+    .btn{background:var(--vino);color:#fff;border:none;font-weight:700;cursor:pointer;border-radius:8px;padding:10px}
+    .btn:hover{background:var(--vino-2)}
+    .btn.alt{background:#fff;color:var(--vino);border:2px solid var(--vino)}
+    .btn.accent{background:var(--accent);color:#000}
+    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .actions .btn{flex:1}
+    .output{background:var(--muted);border-radius:8px;padding:10px;margin-top:12px;white-space:pre-wrap;font-family:monospace;font-size:14px}
+    .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+    .chip{background:var(--vino);color:#fff;padding:4px 10px;border-radius:20px;display:flex;align-items:center;gap:6px;font-size:14px}
+    .chip button{background:none;border:none;color:#fff;font-size:14px;cursor:pointer}
+    #otroNombre{display:none;margin-top:6px}
+    .highlight-block{border:2px solid var(--vino);border-radius:12px;padding:10px;margin:10px 0;background:#fafafa}
+    #qr-reader{width:100%;max-width:320px;margin:auto;display:none;margin-top:12px}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Formatos Tecnoven</h2>
+
+    <div class="highlight-block">
+      <label for="tipoTrabajo">Tipo de trabajo</label>
+      <select id="tipoTrabajo">
+        <option value="instalacion">Instalación</option>
+        <option value="soporte">Soporte</option>
+      </select>
+
+      <label for="servicio">Servicio</label>
+      <select id="servicio">
+        <option value="Internet">Internet</option>
+        <option value="TV">TV</option>
+        <option value="Ambos">Ambos</option>
+      </select>
+    </div>
+
+    <label for="fecha">Fecha</label>
+    <div class="row">
+      <input id="fecha" placeholder="30 08 2025">
+      <button type="button" class="btn accent" id="btnFecha">Ahora</button>
+    </div>
+
+    <label for="cliente">Nombre de cliente</label>
+    <input id="cliente">
+
+    <label>Hora inicio</label>
+    <div class="row">
+      <input id="horaInicio" placeholder="9 37">
+      <button type="button" class="btn" id="btnAhoraIni">Ahora</button>
+    </div>
+
+    <label>Hora fin</label>
+    <div class="row">
+      <input id="horaFin" placeholder="12 15">
+      <button type="button" class="btn" id="btnAhoraFin">Ahora</button>
+    </div>
+
+    <label for="serial">Serial</label>
+    <div class="row">
+      <input id="serial">
+      <button type="button" class="btn accent" onclick="startQRScanner()">📷 Escanear</button>
+    </div>
+    <div id="qr-reader"></div>
+
+    <label for="nap">NAP</label><input id="nap">
+    <label for="puerto">Puerto</label><input id="puerto">
+    <label for="potencia">Potencia</label><input id="potencia">
+    <label for="apc">Conector APC</label><input id="apc">
+    <label for="upc">Conector UPC</label><input id="upc">
+    <label for="rg6">Conector RG6</label><input id="rg6">
+    <label for="rj45">Conector RJ45</label><input id="rj45">
+    <label for="splitter">Splitter TV</label><input id="splitter">
+    <label for="roseta">Roseta</label><input id="roseta">
+    <label for="manguita">Manguita</label><input id="manguita">
+    <label for="utp">Metraje UTP</label><input id="utp">
+    <label for="drop">Metraje Drop</label><input id="drop">
+    <label for="coaxial">Metraje Coaxial</label><input id="coaxial">
+    <label for="mastil">Mástil</label><input id="mastil">
+    <label for="grapas">Grapas y Clavos</label><input id="grapas">
+    <label for="ramplug">Ramplug y Tornillos</label><input id="ramplug">
+
+    <label>Técnicos</label>
+    <select id="tecnicosSelect">
+      <option value="">-- Selecciona técnico --</option>
+      <option value="Alejandro Blanco">Alejandro Blanco</option>
+      <option value="Alejandro Soto">Alejandro Soto</option>
+      <option value="Danny Perez">Danny Perez</option>
+      <option value="Keiver Zambrano">Keiver Zambrano</option>
+      <option value="Mayckkol Fuenmayor">Mayckkol Fuenmayor</option>
+      <option value="Alfonso Solarte">Alfonso Solarte</option>
+      <option value="Anddy Bravo">Anddy Bravo</option>
+      <option value="Alexander Zambrano">Alexander Zambrano</option>
+      <option value="Josue Utria">Josue Utria</option>
+      <option value="Leonardo Montiel">Leonardo Montiel</option>
+      <option value="Hebert Vargas">Hebert Vargas</option>
+      <option value="Pedro Linares">Pedro Linares</option>
+      <option value="Jose Luiz Gonzalez">Jose Luiz Gonzalez</option>
+      <option value="Ricardo Valencia">Ricardo Valencia</option>
+      <option value="Otro">Otro</option>
+    </select>
+    <div class="chips" id="chipsContainer"></div>
+    <input id="otroNombre" placeholder="Escribe otro nombre">
+
+    <label for="cobro">Cobrar</label><input id="cobro">
+
+    <label for="observacion">Observación</label>
+    <textarea id="observacion"></textarea>
+
+    <div class="actions">
+      <button class="btn" id="btnGenerar">Generar</button>
+      <button class="btn alt" id="btnCopiar">Copiar</button>
+      <button class="btn accent" id="btnNuevo">Nuevo Formato</button>
+    </div>
+
+    <div class="output" id="resultado"></div>
+  </div>
+
+<script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+
+function toNA(v){v=(v||"").trim();return (v===""||v==="0")?"n/a":v;}
+function formatFecha(v){v=toNA(v);if(v==="n/a")return v;v=v.replace(/-/g,"/").replace(/\s+/g,"/");const p=v.split("/");if(p.length===3){return p[0].padStart(2,"0")+"/"+p[1].padStart(2,"0")+"/"+p[2];}return v;}
+function formatHora(v){v=toNA(v);if(v==="n/a")return v;const p=v.split(" ");if(p.length===2){let h=parseInt(p[0]);let m=p[1].padStart(2,"0");let suf=h>=12?"PM":"AM";if(h>12)h-=12;if(h===0)h=12;return h+":"+m+suf;}return v;}
+function setHoraAhora(id){const d=new Date();$(id).value=d.getHours()+" "+String(d.getMinutes()).padStart(2,"0");}
+$("btnFecha").onclick=()=>{const d=new Date();$("fecha").value=("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear();}
+$("btnAhoraIni").onclick=()=>setHoraAhora("horaInicio");
+$("btnAhoraFin").onclick=()=>setHoraAhora("horaFin");
+
+let tecnicosSeleccionados=[];
+function renderChips(){
+  const c=$("chipsContainer");c.innerHTML="";
+  tecnicosSeleccionados.forEach((t,i)=>{
+    const chip=document.createElement("div");
+    chip.className="chip";chip.textContent=t+" ";
+    const btn=document.createElement("button");btn.textContent="❌";
+    btn.onclick=()=>{tecnicosSeleccionados.splice(i,1);renderChips();};
+    chip.appendChild(btn);c.appendChild(chip);
+  });
+  $("otroNombre").style.display=tecnicosSeleccionados.includes("Otro")?"block":"none";
+}
+$("tecnicosSelect").onchange=()=>{
+  const v=$("tecnicosSelect").value;if(v && !tecnicosSeleccionados.includes(v)){tecnicosSeleccionados.push(v);renderChips();}
+  $("tecnicosSelect").value="";
+};
+
+// --- QR scanner ---
+function startQRScanner() {
+  $("qr-reader").style.display = "block";
+  const html5QrCode = new Html5Qrcode("qr-reader");
+  html5QrCode.start(
+    { facingMode: "environment" },
+    { fps: 10, qrbox: 250 },
+    (decodedText) => {
+      // Procesar texto y extraer PON SN
+      const lines = decodedText.split(/\r?\n/);
+      let serialValue = decodedText;
+      for (let line of lines) {
+        if (line.startsWith("PON SN:")) {
+          serialValue = line.replace("PON SN:", "").trim();
+          break;
+        }
+      }
+      $("serial").value = serialValue;
+
+      html5QrCode.stop().then(() => {
+        $("qr-reader").style.display = "none";
+      });
+    },
+    (errorMessage) => {
+      console.log("Escaneo fallido: ", errorMessage);
+    }
+  ).catch(err => {
+    alert("Error al iniciar cámara: " + err);
+  });
+}
+
+$("btnGenerar").onclick=()=>{
+  const tipo=$("tipoTrabajo").value;
+  const serv=$("servicio").value==="Ambos"?"Internet + TV":$("servicio").value;
+  const txt=`TIPO DE TRABAJO: ${tipo==="instalacion"?"Instalación":"Soporte"}
+INSTALACIÓN: ${serv}
+FECHA: ${formatFecha($("fecha").value)}
+NOMBRE DE CLIENTE: ${toNA($("cliente").value)}
+HORA INICIO: ${formatHora($("horaInicio").value)}
+HORA FIN: ${formatHora($("horaFin").value)}
+SERIAL: ${toNA($("serial").value)}
+NAP: ${toNA($("nap").value)}
+PUERTO: ${toNA($("puerto").value)}
+POTENCIA: ${toNA($("potencia").value)}
+CONECTOR APC: ${toNA($("apc").value)}
+CONECTOR UPC: ${toNA($("upc").value)}
+CONECTOR RG6: ${toNA($("rg6").value)}
+CONECTOR RJ45: ${toNA($("rj45").value)}
+SPLITTER TV: ${toNA($("splitter").value)}
+ROSETA: ${toNA($("roseta").value)}
+MANGUITA: ${toNA($("manguita").value)}
+METRAJE UTP: ${toNA($("utp").value)}
+METRAJE DROP: ${toNA($("drop").value)}
+METRAJE COAXIAL: ${toNA($("coaxial").value)}
+MASTIL: ${toNA($("mastil").value)}
+GRAPAS y CLAVOS: ${toNA($("grapas").value)}
+Ramplug y Tornillos: ${toNA($("ramplug").value)}
+TÉCNICOS: ${(()=>{
+  const otros= $("otroNombre").style.display==="block"?$("otroNombre").value.trim():"";
+  return (tecnicosSeleccionados.concat(otros?otros.split(","):[])).filter(Boolean).join(" - ")||"n/a";
+})()}
+Cobrar: ${toNA($("cobro").value)}
+
+Observación:
+${(()=>{
+  let obs=$("observacion").value.trim();
+  if(tipo==="instalacion"){return obs===""||obs==="0"?"Se realizó la instalación quedando con servicio operativo.":obs;}
+  if(tipo==="soporte"){if(obs===""||obs==="0"){alert("Debes escribir observación en soporte");throw "no";}return obs;}
+})()}`;
+  $("resultado").textContent=txt;
+};
+$("btnCopiar").onclick=async()=>{
+  const t=$("resultado").textContent;if(!t){alert("Genera primero");return;}
+  try{await navigator.clipboard.writeText(t);alert("Copiado ✅");}
+  catch{const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);alert("Copiado ✅");}
+};
+$("btnNuevo").onclick=()=>{
+  document.querySelectorAll("input,textarea").forEach(el=>{if(el.type!=="button")el.value="";});
+  tecnicosSeleccionados=[];renderChips();
+  $("resultado").textContent="";
+  const d=new Date();$("fecha").value=("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear();
+  setHoraAhora("horaInicio");
+};
+setHoraAhora("horaInicio");
+</script>
+</body>
+</html>
