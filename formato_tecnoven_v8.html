@@ -40,13 +40,14 @@
         font-weight: 700;
     }
     .menu-toggle {
-      font-size: 2rem;
-      background: none;
+      font-size: 1rem;
+      background: var(--vino-2);
       border: none;
       color: white;
       cursor: pointer;
       line-height: 1;
-      padding: 0;
+      padding: 8px 16px;
+      border-radius: 8px;
       z-index: 102;
     }
     .nav-menu {
@@ -100,12 +101,9 @@
       padding:18px;
       margin-top: -65px;
     }
-
-    /* FIX: Oculta todos los formatos por defecto */
     .content-section {
       display: none;
     }
-    /* FIX: Solo muestra el formato activo */
     .content-section.active {
       display: block;
     }
@@ -233,7 +231,7 @@
   <div class="nav-menu">
     <h3>Formatos</h3>
     <ul>
-      <li><a href="#" class="nav-link active" data-target="ficha-instalacion">Ficha de Instalación</a></li>
+      <li><a href="#" class="nav-link" data-target="ficha-instalacion">Ficha de Instalación</a></li>
       <li><a href="#" class="nav-link" data-target="proceso-activacion">Proceso de Activación</a></li>
       <li><a href="#" class="nav-link" data-target="solicitud">Solicitud</a></li>
     </ul>
@@ -242,11 +240,11 @@
   <div class="main-content">
     <header class="header">
       <h1>Tecnoven Formatos</h1>
-      <button class="menu-toggle">≡</button>
+      <button class="menu-toggle">Menú</button>
     </header>
 
     <!-- Sección de Ficha de Instalación -->
-    <div id="ficha-instalacion" class="content-section active">
+    <div id="ficha-instalacion" class="content-section">
       <h2>Ficha de Instalación</h2>
       <div class="highlight-block">
         <label for="tipoTrabajo">Tipo de trabajo</label>
@@ -518,14 +516,22 @@ const contentSections = document.querySelectorAll('.content-section');
 menuToggle.addEventListener('click', () => {
   navMenu.classList.toggle('active');
 });
+function showSection(targetId) {
+    contentSections.forEach(section => section.classList.remove('active'));
+    $(targetId).classList.add('active');
+    navLinks.forEach(link => {
+      if (link.dataset.target === targetId) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+}
 navLinks.forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
-    navLinks.forEach(l => l.classList.remove('active'));
-    link.classList.add('active');
-    contentSections.forEach(section => section.classList.remove('active'));
     const targetId = link.dataset.target;
-    $(targetId).classList.add('active');
+    showSection(targetId);
     navMenu.classList.remove('active');
   });
 });
@@ -798,9 +804,13 @@ $("btnCloseScanner").onclick = () => {
         });
     }
 };
-// Establecer el estado inicial
-setHoraAhora("horaInicio");
-renderChips();
+
+document.addEventListener('DOMContentLoaded', () => {
+    showSection('ficha-instalacion');
+    const d=new Date();$("fecha").value=("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear();
+    setHoraAhora("horaInicio");
+    renderChips();
+});
 </script>
 </body>
 </html>
