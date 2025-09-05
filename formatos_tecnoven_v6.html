@@ -50,12 +50,12 @@
     .btn.accent:hover{background:var(--vino-2)}
     .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
     .actions .btn{flex:1}
-    .output{background:var(--muted);border-radius:8px;padding:10px;margin-top:12px;white-space:pre-wrap;font-family:monospace;font-size:14px}
+    .output{background:var(--muted);color:black;border-radius:8px;padding:10px;margin-top:12px;white-space:pre-wrap;font-family:monospace;font-size:14px}
     .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
     .chip{background:var(--vino);color:#fff;padding:4px 10px;border-radius:20px;display:flex;align-items:center;gap:6px;font-size:14px}
     .chip button{background:none;border:none;color:#fff;font-size:14px;cursor:pointer}
     #otroNombre{display:none;margin-top:6px}
-    .highlight-block{border:2px solid var(--vino);border-radius:12px;padding:10px;margin:10px 0;background:#fafafa}
+    .highlight-block{border:2px solid var(--vino);border-radius:12px;padding:10px;margin:10px 0;background:#fafafa;color:var(--ink);}
 
     /* Estilos para el modal del escáner y los mensajes */
     .modal-overlay {
@@ -100,6 +100,28 @@
     }
     .message-box.show {
         opacity: 1;
+    }
+
+    .counter-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .counter-control button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--vino);
+      color: white;
+      font-size: 20px;
+      line-height: 1;
+      border: none;
+      cursor: pointer;
+    }
+    .counter-control span {
+      width: 50px;
+      text-align: center;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -180,21 +202,105 @@
       <option value="16">16</option>
     </select>
 
-    <label for="potencia">Potencia</label><input id="potencia">
-    <label for="apc">Conector APC</label><input id="apc">
-    <label for="upc">Conector UPC</label><input id="upc">
-    <label for="rg6">Conector RG6</label><input id="rg6">
-    <label for="rj45">Conector RJ45</label><input id="rj45">
-    <label for="splitter">Splitter TV</label><input id="splitter">
-    <label for="roseta">Roseta</label><input id="roseta">
-    <label for="manguita">Manguita</label><input id="manguita">
-    <label for="couple">Couple</label><input id="couple">
-    <label for="utp">Metraje UTP</label><input id="utp">
-    <label for="drop">Metraje Drop</label><input id="drop">
-    <label for="coaxial">Metraje Coaxial</label><input id="coaxial">
-    <label for="mastil">Mástil</label><input id="mastil">
-    <label for="grapas">Grapas y Clavos</label><input id="grapas">
-    <label for="ramplug">Ramplug y Tornillos</label><input id="ramplug">
+    <label>Potencia</label><input id="potencia">
+    
+    <label for="apc-counter">Conector APC</label>
+    <div id="apc-counter" class="counter-control">
+      <button data-type="apc" data-action="decrease">-</button>
+      <span data-type="apc">0</span>
+      <button data-type="apc" data-action="increase">+</button>
+    </div>
+    
+    <label for="upc-counter">Conector UPC</label>
+    <div id="upc-counter" class="counter-control">
+      <button data-type="upc" data-action="decrease">-</button>
+      <span data-type="upc">0</span>
+      <button data-type="upc" data-action="increase">+</button>
+    </div>
+    
+    <label for="rg6-counter">Conector RG6</label>
+    <div id="rg6-counter" class="counter-control">
+      <button data-type="rg6" data-action="decrease">-</button>
+      <span data-type="rg6">0</span>
+      <button data-type="rg6" data-action="increase">+</button>
+    </div>
+
+    <label for="rj45-counter">Conector RJ45</label>
+    <div id="rj45-counter" class="counter-control">
+      <button data-type="rj45" data-action="decrease">-</button>
+      <span data-type="rj45">0</span>
+      <button data-type="rj45" data-action="increase">+</button>
+    </div>
+    
+    <label for="splitter-counter">Splitter TV</label>
+    <div id="splitter-counter" class="counter-control">
+      <button data-type="splitter" data-action="decrease">-</button>
+      <span data-type="splitter">0</span>
+      <button data-type="splitter" data-action="increase">+</button>
+    </div>
+
+    <label for="roseta-counter">Roseta</label>
+    <div id="roseta-counter" class="counter-control">
+      <button data-type="roseta" data-action="decrease">-</button>
+      <span data-type="roseta">0</span>
+      <button data-type="roseta" data-action="increase">+</button>
+    </div>
+
+    <label for="manguita-counter">Manguita</label>
+    <div id="manguita-counter" class="counter-control">
+      <button data-type="manguita" data-action="decrease">-</button>
+      <span data-type="manguita">0</span>
+      <button data-type="manguita" data-action="increase">+</button>
+    </div>
+
+    <label for="couple-counter">Couple</label>
+    <div id="couple-counter" class="counter-control">
+      <button data-type="couple" data-action="decrease">-</button>
+      <span data-type="couple">0</span>
+      <button data-type="couple" data-action="increase">+</button>
+    </div>
+
+    <label for="utp-counter">Metraje UTP</label>
+    <div id="utp-counter" class="counter-control">
+      <button data-type="utp" data-action="decrease">-</button>
+      <span data-type="utp">0</span>
+      <button data-type="utp" data-action="increase">+</button>
+    </div>
+
+    <label for="drop-counter">Metraje Drop</label>
+    <div id="drop-counter" class="counter-control">
+      <button data-type="drop" data-action="decrease">-</button>
+      <span data-type="drop">0</span>
+      <button data-type="drop" data-action="increase">+</button>
+    </div>
+
+    <label for="coaxial-counter">Metraje Coaxial</label>
+    <div id="coaxial-counter" class="counter-control">
+      <button data-type="coaxial" data-action="decrease">-</button>
+      <span data-type="coaxial">0</span>
+      <button data-type="coaxial" data-action="increase">+</button>
+    </div>
+
+    <label for="mastil-counter">Mástil</label>
+    <div id="mastil-counter" class="counter-control">
+      <button data-type="mastil" data-action="decrease">-</button>
+      <span data-type="mastil">0</span>
+      <button data-type="mastil" data-action="increase">+</button>
+    </div>
+
+    <label for="grapas-counter">Grapas y Clavos</label>
+    <div id="grapas-counter" class="counter-control">
+      <button data-type="grapas" data-action="decrease">-</button>
+      <span data-type="grapas">0</span>
+      <button data-type="grapas" data-action="increase">+</button>
+    </div>
+
+    <label for="ramplug-counter">Ramplug y Tornillos</label>
+    <div id="ramplug-counter" class="counter-control">
+      <button data-type="ramplug" data-action="decrease">-</button>
+      <span data-type="ramplug">0</span>
+      <button data-type="ramplug" data-action="increase">+</button>
+    </div>
 
     <label>Técnicos</label>
     <select id="tecnicosSelect">
@@ -252,6 +358,53 @@
 <script>
 const $ = id => document.getElementById(id);
 
+// Mapeo de elementos de entrada a sus IDs para guardar/cargar
+const formFields = [
+  'tipoTrabajo', 'servicio', 'fecha', 'cliente', 'horaInicio', 'horaFin', 'serial',
+  'napRegion', 'napNumber', 'puerto', 'potencia', 'otroNombre', 'cobro', 'observacion'
+];
+const counterFields = [
+  'apc', 'upc', 'rg6', 'rj45', 'splitter', 'roseta', 'manguita',
+  'couple', 'utp', 'drop', 'coaxial', 'mastil', 'grapas', 'ramplug'
+];
+
+// Función para guardar el estado del formulario en localStorage
+function saveState() {
+  const state = {};
+  formFields.forEach(id => {
+    const el = $(id);
+    if (el) state[id] = el.value;
+  });
+  state.tecnicosSeleccionados = tecnicosSeleccionados;
+  
+  counterFields.forEach(type => {
+    const span = document.querySelector(`span[data-type="${type}"]`);
+    if (span) state[type] = span.textContent;
+  });
+
+  localStorage.setItem('tecnovenFormState', JSON.stringify(state));
+}
+
+// Función para cargar el estado del formulario desde localStorage
+function loadState() {
+  const savedState = localStorage.getItem('tecnovenFormState');
+  if (savedState) {
+    const state = JSON.parse(savedState);
+    formFields.forEach(id => {
+      const el = $(id);
+      if (el && state[id] !== undefined) el.value = state[id];
+    });
+    if (state.tecnicosSeleccionados) {
+      tecnicosSeleccionados = state.tecnicosSeleccionados;
+      renderChips();
+    }
+    counterFields.forEach(type => {
+      const span = document.querySelector(`span[data-type="${type}"]`);
+      if (span && state[type] !== undefined) span.textContent = state[type];
+    });
+  }
+}
+
 // Función para mostrar mensajes de alerta personalizados
 function showAlert(message) {
     const box = $("messageBox");
@@ -268,8 +421,8 @@ function myAlert(message) {
 function toNA(v){v=(v||"").trim();return (v===""||v==="0")?"n/a":v;}
 function formatFecha(v){v=toNA(v);if(v==="n/a")return v;v=v.replace(/-/g,"/").replace(/\s+/g,"/");const p=v.split("/");if(p.length===3){return p[0].padStart(2,"0")+"/"+p[1].padStart(2,"0")+"/"+p[2];}return v;}
 function formatHora(v){v=toNA(v);if(v==="n/a")return v;const p=v.split(" ");if(p.length===2){let h=parseInt(p[0]);let m=p[1].padStart(2,"0");let suf=h>=12?"PM":"AM";if(h>12)h-=12;if(h===0)h=12;return h+":"+m+suf;}return v;}
-function setHoraAhora(id){const d=new Date();$(id).value=d.getHours()+" "+String(d.getMinutes()).padStart(2,"0");}
-$("btnFecha").onclick=()=>{const d=new Date();$("fecha").value=("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear();}
+function setHoraAhora(id){const d=new Date();$(id).value=d.getHours()+" "+String(d.getMinutes()).padStart(2,"0");saveState();}
+$("btnFecha").onclick=()=>{const d=new Date();$("fecha").value=("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear();saveState();}
 $("btnAhoraIni").onclick=()=>setHoraAhora("horaInicio");
 $("btnAhoraFin").onclick=()=>setHoraAhora("horaFin");
 
@@ -280,15 +433,22 @@ function renderChips(){
     const chip=document.createElement("div");
     chip.className="chip";chip.textContent=t+" ";
     const btn=document.createElement("button");btn.textContent="❌";
-    btn.onclick=()=>{tecnicosSeleccionados.splice(i,1);renderChips();};
+    btn.onclick=()=>{tecnicosSeleccionados.splice(i,1);renderChips();saveState();};
     chip.appendChild(btn);c.appendChild(chip);
   });
   $("otroNombre").style.display=tecnicosSeleccionados.includes("Otro")?"block":"none";
+  saveState();
 }
 $("tecnicosSelect").onchange=()=>{
   const v=$("tecnicosSelect").value;if(v && !tecnicosSeleccionados.includes(v)){tecnicosSeleccionados.push(v);renderChips();}
   $("tecnicosSelect").value="";
 };
+
+// Event listeners para guardar el estado en cada cambio
+formFields.forEach(id => {
+  const el = $(id);
+  if (el) el.addEventListener('input', saveState);
+});
 
 $("btnGenerar").onclick=()=>{
   const tipo=$("tipoTrabajo").value;
@@ -297,6 +457,13 @@ $("btnGenerar").onclick=()=>{
   const napRegion = $("napRegion").value;
   const napNumber = $("napNumber").value;
   const napValue = napNumber ? `${napRegion}-${napNumber}` : "";
+
+  // Obtener valores de los contadores
+  const counterValues = {};
+  counterFields.forEach(type => {
+    const span = document.querySelector(`span[data-type="${type}"]`);
+    counterValues[type] = span ? span.textContent : '0';
+  });
 
   const txt=`TIPO DE TRABAJO: ${tipo==="instalacion"?"Instalación":"Soporte"}
 INSTALACIÓN: ${serv}
@@ -308,20 +475,20 @@ SERIAL: ${toNA($("serial").value)}
 NAP: ${toNA(napValue)}
 PUERTO: ${toNA($("puerto").value)}
 POTENCIA: ${toNA($("potencia").value)}
-CONECTOR APC: ${toNA($("apc").value)}
-CONECTOR UPC: ${toNA($("upc").value)}
-CONECTOR RG6: ${toNA($("rg6").value)}
-CONECTOR RJ45: ${toNA($("rj45").value)}
-SPLITTER TV: ${toNA($("splitter").value)}
-ROSETA: ${toNA($("roseta").value)}
-MANGUITA: ${toNA($("manguita").value)}
-COUPLE: ${toNA($("couple").value)}
-METRAJE UTP: ${toNA($("utp").value)}
-METRAJE DROP: ${toNA($("drop").value)}
-METRAJE COAXIAL: ${toNA($("coaxial").value)}
-MASTIL: ${toNA($("mastil").value)}
-GRAPAS y CLAVOS: ${toNA($("grapas").value)}
-Ramplug y Tornillos: ${toNA($("ramplug").value)}
+CONECTOR APC: ${toNA(counterValues.apc)}
+CONECTOR UPC: ${toNA(counterValues.upc)}
+CONECTOR RG6: ${toNA(counterValues.rg6)}
+CONECTOR RJ45: ${toNA(counterValues.rj45)}
+SPLITTER TV: ${toNA(counterValues.splitter)}
+ROSETA: ${toNA(counterValues.roseta)}
+MANGUITA: ${toNA(counterValues.manguita)}
+COUPLE: ${toNA(counterValues.couple)}
+METRAJE UTP: ${toNA(counterValues.utp)}
+METRAJE DROP: ${toNA(counterValues.drop)}
+METRAJE COAXIAL: ${toNA(counterValues.coaxial)}
+MASTIL: ${toNA(counterValues.mastil)}
+GRAPAS y CLAVOS: ${toNA(counterValues.grapas)}
+Ramplug y Tornillos: ${toNA(counterValues.ramplug)}
 TÉCNICOS: ${(()=>{
   const tecnicosFinales = [];
   tecnicosSeleccionados.forEach(t => {
@@ -357,11 +524,37 @@ $("btnNuevo").onclick=()=>{
   document.querySelectorAll("input,textarea").forEach(el=>{if(el.type!=="button")el.value="";});
   tecnicosSeleccionados=[];renderChips();
   $("resultado").textContent="";
+  // Reiniciar contadores a 0
+  counterFields.forEach(type => {
+    const span = document.querySelector(`span[data-type="${type}"]`);
+    if (span) span.textContent = '0';
+  });
   const d=new Date();$("fecha").value=("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear();
   setHoraAhora("horaInicio");
+  localStorage.removeItem('tecnovenFormState');
 };
-setHoraAhora("horaInicio");
 
+// Lógica de los contadores interactivos
+document.querySelectorAll('.counter-control button').forEach(button => {
+  button.addEventListener('click', (e) => {
+    const type = e.target.dataset.type;
+    const action = e.target.dataset.action;
+    const span = document.querySelector(`span[data-type="${type}"]`);
+    let count = parseInt(span.textContent);
+    
+    if (action === 'increase') {
+      count++;
+    } else if (action === 'decrease' && count > 0) {
+      count--;
+    }
+    
+    span.textContent = count;
+    saveState();
+  });
+});
+
+setHoraAhora("horaInicio");
+loadState();
 
 let html5QrCodeScanner;
 
