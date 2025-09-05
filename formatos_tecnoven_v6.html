@@ -123,6 +123,18 @@
       text-align: center;
       font-weight: bold;
     }
+
+    /* Nuevo estilo para los campos de metraje con contador y entrada manual */
+    .metraje-input-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .metraje-input-group input {
+      flex: 1;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -204,98 +216,107 @@
 
     <label>Potencia</label><input id="potencia">
     
-    <label for="apc-counter">Conector APC</label>
+    <label>Conector APC</label>
     <div id="apc-counter" class="counter-control">
       <button data-type="apc" data-action="decrease">-</button>
       <span data-type="apc">0</span>
       <button data-type="apc" data-action="increase">+</button>
     </div>
     
-    <label for="upc-counter">Conector UPC</label>
+    <label>Conector UPC</label>
     <div id="upc-counter" class="counter-control">
       <button data-type="upc" data-action="decrease">-</button>
       <span data-type="upc">0</span>
       <button data-type="upc" data-action="increase">+</button>
     </div>
     
-    <label for="rg6-counter">Conector RG6</label>
+    <label>Conector RG6</label>
     <div id="rg6-counter" class="counter-control">
       <button data-type="rg6" data-action="decrease">-</button>
       <span data-type="rg6">0</span>
       <button data-type="rg6" data-action="increase">+</button>
     </div>
 
-    <label for="rj45-counter">Conector RJ45</label>
+    <label>Conector RJ45</label>
     <div id="rj45-counter" class="counter-control">
       <button data-type="rj45" data-action="decrease">-</button>
       <span data-type="rj45">0</span>
       <button data-type="rj45" data-action="increase">+</button>
     </div>
     
-    <label for="splitter-counter">Splitter TV</label>
+    <label>Splitter TV</label>
     <div id="splitter-counter" class="counter-control">
       <button data-type="splitter" data-action="decrease">-</button>
       <span data-type="splitter">0</span>
       <button data-type="splitter" data-action="increase">+</button>
     </div>
 
-    <label for="roseta-counter">Roseta</label>
+    <label>Roseta</label>
     <div id="roseta-counter" class="counter-control">
       <button data-type="roseta" data-action="decrease">-</button>
       <span data-type="roseta">0</span>
       <button data-type="roseta" data-action="increase">+</button>
     </div>
 
-    <label for="manguita-counter">Manguita</label>
+    <label>Manguita</label>
     <div id="manguita-counter" class="counter-control">
       <button data-type="manguita" data-action="decrease">-</button>
       <span data-type="manguita">0</span>
       <button data-type="manguita" data-action="increase">+</button>
     </div>
 
-    <label for="couple-counter">Couple</label>
+    <label>Couple</label>
     <div id="couple-counter" class="counter-control">
       <button data-type="couple" data-action="decrease">-</button>
       <span data-type="couple">0</span>
       <button data-type="couple" data-action="increase">+</button>
     </div>
 
-    <label for="utp-counter">Metraje UTP</label>
-    <div id="utp-counter" class="counter-control">
-      <button data-type="utp" data-action="decrease">-</button>
-      <span data-type="utp">0</span>
-      <button data-type="utp" data-action="increase">+</button>
+    <label>Metraje UTP</label>
+    <div class="metraje-input-group">
+      <div id="utp-counter" class="counter-control">
+        <button data-type="utp" data-action="decrease">-</button>
+        <span data-type="utp">0</span>
+        <button data-type="utp" data-action="increase">+</button>
+      </div>
+      <input type="number" id="utpManual" value="0">
     </div>
 
-    <label for="drop-counter">Metraje Drop</label>
-    <div id="drop-counter" class="counter-control">
-      <button data-type="drop" data-action="decrease">-</button>
-      <span data-type="drop">0</span>
-      <button data-type="drop" data-action="increase">+</button>
+    <label>Metraje Drop</label>
+    <div class="metraje-input-group">
+      <div id="drop-counter" class="counter-control">
+        <button data-type="drop" data-action="decrease">-</button>
+        <span data-type="drop">0</span>
+        <button data-type="drop" data-action="increase">+</button>
+      </div>
+      <input type="number" id="dropManual" value="0">
     </div>
 
-    <label for="coaxial-counter">Metraje Coaxial</label>
-    <div id="coaxial-counter" class="counter-control">
-      <button data-type="coaxial" data-action="decrease">-</button>
-      <span data-type="coaxial">0</span>
-      <button data-type="coaxial" data-action="increase">+</button>
+    <label>Metraje Coaxial</label>
+    <div class="metraje-input-group">
+      <div id="coaxial-counter" class="counter-control">
+        <button data-type="coaxial" data-action="decrease">-</button>
+        <span data-type="coaxial">0</span>
+        <button data-type="coaxial" data-action="increase">+</button>
+      </div>
+      <input type="number" id="coaxialManual" value="0">
     </div>
 
-    <label for="mastil-counter">Mástil</label>
+    <label>Mástil</label>
     <div id="mastil-counter" class="counter-control">
       <button data-type="mastil" data-action="decrease">-</button>
       <span data-type="mastil">0</span>
       <button data-type="mastil" data-action="increase">+</button>
     </div>
 
-    <label for="grapas-counter">Grapas y Clavos</label>
+    <label>Grapas y Clavos</label>
     <div id="grapas-counter" class="counter-control">
       <button data-type="grapas" data-action="decrease">-</button>
       <span data-type="grapas">0</span>
       <button data-type="grapas" data-action="increase">+</button>
     </div>
 
-    <label for="ramplug-counter">Ramplug y Tornillos</label>
+    <label>Ramplug y Tornillos</label>
     <div id="ramplug-counter" class="counter-control">
       <button data-type="ramplug" data-action="decrease">-</button>
       <span data-type="ramplug">0</span>
@@ -363,6 +384,8 @@ const formFields = [
   'tipoTrabajo', 'servicio', 'fecha', 'cliente', 'horaInicio', 'horaFin', 'serial',
   'napRegion', 'napNumber', 'puerto', 'potencia', 'otroNombre', 'cobro', 'observacion'
 ];
+// Agregar los nuevos campos manuales para guardar y cargar
+const metrajeManualFields = ['utpManual', 'dropManual', 'coaxialManual'];
 const counterFields = [
   'apc', 'upc', 'rg6', 'rj45', 'splitter', 'roseta', 'manguita',
   'couple', 'utp', 'drop', 'coaxial', 'mastil', 'grapas', 'ramplug'
@@ -380,6 +403,12 @@ function saveState() {
   counterFields.forEach(type => {
     const span = document.querySelector(`span[data-type="${type}"]`);
     if (span) state[type] = span.textContent;
+  });
+
+  // Guardar también los nuevos campos manuales
+  metrajeManualFields.forEach(id => {
+    const el = $(id);
+    if (el) state[id] = el.value;
   });
 
   localStorage.setItem('tecnovenFormState', JSON.stringify(state));
@@ -401,6 +430,17 @@ function loadState() {
     counterFields.forEach(type => {
       const span = document.querySelector(`span[data-type="${type}"]`);
       if (span && state[type] !== undefined) span.textContent = state[type];
+    });
+
+    // Cargar también los nuevos campos manuales y sincronizar con los contadores
+    metrajeManualFields.forEach(id => {
+      const el = $(id);
+      if (el && state[id] !== undefined) {
+        el.value = state[id];
+        const type = id.replace('Manual', '');
+        const span = document.querySelector(`span[data-type="${type}"]`);
+        if (span) span.textContent = el.value;
+      }
     });
   }
 }
@@ -450,6 +490,17 @@ formFields.forEach(id => {
   if (el) el.addEventListener('input', saveState);
 });
 
+// Event listeners para los nuevos campos manuales
+metrajeManualFields.forEach(id => {
+  const el = $(id);
+  if (el) el.addEventListener('input', (e) => {
+    const type = id.replace('Manual', '');
+    const span = document.querySelector(`span[data-type="${type}"]`);
+    if (span) span.textContent = e.target.value;
+    saveState();
+  });
+});
+
 $("btnGenerar").onclick=()=>{
   const tipo=$("tipoTrabajo").value;
   const serv=$("servicio").value==="Ambos"?"Internet + TV":$("servicio").value;
@@ -458,11 +509,16 @@ $("btnGenerar").onclick=()=>{
   const napNumber = $("napNumber").value;
   const napValue = napNumber ? `${napRegion}-${napNumber}` : "";
 
-  // Obtener valores de los contadores
+  // Obtener valores de los contadores, priorizando los campos manuales para el metraje
   const counterValues = {};
   counterFields.forEach(type => {
     const span = document.querySelector(`span[data-type="${type}"]`);
-    counterValues[type] = span ? span.textContent : '0';
+    if (metrajeManualFields.includes(`${type}Manual`)) {
+        const manualInput = $(`${type}Manual`);
+        counterValues[type] = manualInput ? manualInput.value : (span ? span.textContent : '0');
+    } else {
+        counterValues[type] = span ? span.textContent : '0';
+    }
   });
 
   const txt=`TIPO DE TRABAJO: ${tipo==="instalacion"?"Instalación":"Soporte"}
@@ -524,10 +580,14 @@ $("btnNuevo").onclick=()=>{
   document.querySelectorAll("input,textarea").forEach(el=>{if(el.type!=="button")el.value="";});
   tecnicosSeleccionados=[];renderChips();
   $("resultado").textContent="";
-  // Reiniciar contadores a 0
+  // Reiniciar contadores y campos manuales a 0
   counterFields.forEach(type => {
     const span = document.querySelector(`span[data-type="${type}"]`);
     if (span) span.textContent = '0';
+  });
+  metrajeManualFields.forEach(id => {
+    const el = $(id);
+    if (el) el.value = '0';
   });
   const d=new Date();$("fecha").value=("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear();
   setHoraAhora("horaInicio");
@@ -539,16 +599,35 @@ document.querySelectorAll('.counter-control button').forEach(button => {
   button.addEventListener('click', (e) => {
     const type = e.target.dataset.type;
     const action = e.target.dataset.action;
-    const span = document.querySelector(`span[data-type="${type}"]`);
-    let count = parseInt(span.textContent);
+    const isMetraje = ['utp', 'drop', 'coaxial'].includes(type);
     
-    if (action === 'increase') {
-      count++;
-    } else if (action === 'decrease' && count > 0) {
-      count--;
+    // Si es un campo de metraje, usar el campo de entrada manual
+    if (isMetraje) {
+      const manualInput = $(`${type}Manual`);
+      let count = parseInt(manualInput.value || 0);
+
+      if (action === 'increase') {
+        count += 10;
+      } else if (action === 'decrease') {
+        count = Math.max(0, count - 10);
+      }
+      
+      manualInput.value = count;
+      const span = document.querySelector(`span[data-type="${type}"]`);
+      if (span) span.textContent = count;
+      
+    } else { // Lógica original para otros contadores
+      const span = document.querySelector(`span[data-type="${type}"]`);
+      let count = parseInt(span.textContent);
+      
+      if (action === 'increase') {
+        count++;
+      } else if (action === 'decrease' && count > 0) {
+        count--;
+      }
+      span.textContent = count;
     }
     
-    span.textContent = count;
     saveState();
   });
 });
