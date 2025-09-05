@@ -370,7 +370,16 @@ function setupQRScanner() {
   const modal = $("qrModal");
   modal.style.display = "flex";
   
-  html5QrCodeScanner = new Html5QrcodeScanner("scanner-container", { fps: 10, qrbox: 250 });
+  // Usar la cámara trasera por defecto
+  const config = { 
+    fps: 10, 
+    qrbox: 250, 
+    cameraConfig: {
+      facingMode: { exact: "environment" }
+    }
+  };
+  
+  html5QrCodeScanner = new Html5QrcodeScanner("scanner-container", config);
   html5QrCodeScanner.render(onScanSuccess, onScanFailure);
 }
 
