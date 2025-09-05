@@ -4,20 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formatos Tecnoven</title>
+  <script src="https://unpkg.com/html5-qrcode"></script>
   <style>
     :root{
       --vino:#4b0e20;
       --vino-2:#6d1433;
       --card:#ffffff;
       --ink:#111;
-      --muted:#f6f6f6;
-      --accent:#ffb300;
+      --muted:#ffffff;
+      --accent:#4b0e20;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:linear-gradient(160deg, var(--vino), #2a0a14 60%);
+      background:linear-gradient(160deg, var(--vino), #2a0a14 100%);
       color:#fff;
       display:flex;
       align-items:center;
@@ -30,23 +31,23 @@
       background:var(--card);
       color:var(--ink);
       border-radius:16px;
-      box-shadow:0 8px 28px rgba(0,0,0,.4);
+      box-shadow:0 8px 28px rgba(0, 217, 255, 0.4);
       padding:18px;
     }
     h2{text-align:center;color:var(--vino);margin-top:0}
     label{display:block;font-weight:700;margin-top:10px}
     input,select,textarea,button{
-      width:100%;padding:10px;margin-top:4px;font-size:16px;
+      width:70%;padding:10px;margin-top:4px;font-size:16px;
       border:1px solid #ddd;border-radius:8px
     }
-    textarea{min-height:70px;resize:vertical}
+    textarea{min-height:100px;resize:vertical}
     .row{display:flex;gap:8px;align-items:center}
-    .row input{flex:3}
-    .row button{flex:1}
+    .row>input, .row>select{flex:1}
     .btn{background:var(--vino);color:#fff;border:none;font-weight:700;cursor:pointer;border-radius:8px;padding:10px}
     .btn:hover{background:var(--vino-2)}
     .btn.alt{background:#fff;color:var(--vino);border:2px solid var(--vino)}
-    .btn.accent{background:var(--accent);color:#000}
+    .btn.accent{background:var(--accent);color:#ffff}
+    .btn.accent:hover{background:var(--vino-2)}
     .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
     .actions .btn{flex:1}
     .output{background:var(--muted);border-radius:8px;padding:10px;margin-top:12px;white-space:pre-wrap;font-family:monospace;font-size:14px}
@@ -55,7 +56,51 @@
     .chip button{background:none;border:none;color:#fff;font-size:14px;cursor:pointer}
     #otroNombre{display:none;margin-top:6px}
     .highlight-block{border:2px solid var(--vino);border-radius:12px;padding:10px;margin:10px 0;background:#fafafa}
-    #qr-reader{width:100%;max-width:320px;margin:auto;display:none;margin-top:12px}
+
+    /* Estilos para el modal del escáner y los mensajes */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+    .modal-content {
+        background: var(--card);
+        color: var(--ink);
+        padding: 24px;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        max-width: 90%;
+        text-align: center;
+    }
+    #scanner-container {
+        width: 300px;
+        height: 300px;
+        margin: 0 auto 16px;
+    }
+    .message-box {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--vino);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        z-index: 1001;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+    .message-box.show {
+        opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -98,15 +143,43 @@
       <button type="button" class="btn" id="btnAhoraFin">Ahora</button>
     </div>
 
+    <!-- Seccion de Serial con el boton para escanear QR -->
     <label for="serial">Serial</label>
     <div class="row">
-      <input id="serial">
-      <button type="button" class="btn accent" onclick="startQRScanner()">📷 Escanear</button>
+      <input id="serial" placeholder="Ingresa serial o escanea QR">
+      <button type="button" class="btn" id="btnScanQR">Escanear QR</button>
     </div>
-    <div id="qr-reader"></div>
+    
+    <label>NAP</label>
+    <div class="row">
+      <select id="napRegion">
+        <option value="MCBO">MCBO</option>
+        <option value="SFCO">SFCO</option>
+      </select>
+      <input id="napNumber" placeholder="Número">
+    </div>
 
-    <label for="nap">NAP</label><input id="nap">
-    <label for="puerto">Puerto</label><input id="puerto">
+    <label for="puerto">Puerto</label>
+    <select id="puerto">
+      <option value="">Selecciona un puerto</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12">12</option>
+      <option value="13">13</option>
+      <option value="14">14</option>
+      <option value="15">15</option>
+      <option value="16">16</option>
+    </select>
+
     <label for="potencia">Potencia</label><input id="potencia">
     <label for="apc">Conector APC</label><input id="apc">
     <label for="upc">Conector UPC</label><input id="upc">
@@ -115,6 +188,7 @@
     <label for="splitter">Splitter TV</label><input id="splitter">
     <label for="roseta">Roseta</label><input id="roseta">
     <label for="manguita">Manguita</label><input id="manguita">
+    <label for="couple">Couple</label><input id="couple">
     <label for="utp">Metraje UTP</label><input id="utp">
     <label for="drop">Metraje Drop</label><input id="drop">
     <label for="coaxial">Metraje Coaxial</label><input id="coaxial">
@@ -158,9 +232,38 @@
     <div class="output" id="resultado"></div>
   </div>
 
-<script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
+  <!-- Modal para el escáner QR -->
+  <div class="modal-overlay" id="qrModal">
+    <div class="modal-content">
+      <h3 class="text-xl font-bold mb-4">Escanear código QR 
+
+
+[Image of a QR code]
+
+</h3>
+      <div id="scanner-container"></div>
+      <button class="btn mt-4" id="btnCloseScanner">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Contenedor para mensajes de alerta -->
+  <div id="messageBox" class="message-box"></div>
+
 <script>
 const $ = id => document.getElementById(id);
+
+// Función para mostrar mensajes de alerta personalizados
+function showAlert(message) {
+    const box = $("messageBox");
+    box.textContent = message;
+    box.classList.add("show");
+    setTimeout(() => box.classList.remove("show"), 3000);
+}
+
+// Función para reemplazar alert nativo
+function myAlert(message) {
+    showAlert(message);
+}
 
 function toNA(v){v=(v||"").trim();return (v===""||v==="0")?"n/a":v;}
 function formatFecha(v){v=toNA(v);if(v==="n/a")return v;v=v.replace(/-/g,"/").replace(/\s+/g,"/");const p=v.split("/");if(p.length===3){return p[0].padStart(2,"0")+"/"+p[1].padStart(2,"0")+"/"+p[2];}return v;}
@@ -187,40 +290,14 @@ $("tecnicosSelect").onchange=()=>{
   $("tecnicosSelect").value="";
 };
 
-// --- QR scanner ---
-function startQRScanner() {
-  $("qr-reader").style.display = "block";
-  const html5QrCode = new Html5Qrcode("qr-reader");
-  html5QrCode.start(
-    { facingMode: "environment" },
-    { fps: 10, qrbox: 250 },
-    (decodedText) => {
-      // Procesar texto y extraer PON SN
-      const lines = decodedText.split(/\r?\n/);
-      let serialValue = decodedText;
-      for (let line of lines) {
-        if (line.startsWith("PON SN:")) {
-          serialValue = line.replace("PON SN:", "").trim();
-          break;
-        }
-      }
-      $("serial").value = serialValue;
-
-      html5QrCode.stop().then(() => {
-        $("qr-reader").style.display = "none";
-      });
-    },
-    (errorMessage) => {
-      console.log("Escaneo fallido: ", errorMessage);
-    }
-  ).catch(err => {
-    alert("Error al iniciar cámara: " + err);
-  });
-}
-
 $("btnGenerar").onclick=()=>{
   const tipo=$("tipoTrabajo").value;
   const serv=$("servicio").value==="Ambos"?"Internet + TV":$("servicio").value;
+  
+  const napRegion = $("napRegion").value;
+  const napNumber = $("napNumber").value;
+  const napValue = napNumber ? `${napRegion}-${napNumber}` : "";
+
   const txt=`TIPO DE TRABAJO: ${tipo==="instalacion"?"Instalación":"Soporte"}
 INSTALACIÓN: ${serv}
 FECHA: ${formatFecha($("fecha").value)}
@@ -228,7 +305,7 @@ NOMBRE DE CLIENTE: ${toNA($("cliente").value)}
 HORA INICIO: ${formatHora($("horaInicio").value)}
 HORA FIN: ${formatHora($("horaFin").value)}
 SERIAL: ${toNA($("serial").value)}
-NAP: ${toNA($("nap").value)}
+NAP: ${toNA(napValue)}
 PUERTO: ${toNA($("puerto").value)}
 POTENCIA: ${toNA($("potencia").value)}
 CONECTOR APC: ${toNA($("apc").value)}
@@ -238,6 +315,7 @@ CONECTOR RJ45: ${toNA($("rj45").value)}
 SPLITTER TV: ${toNA($("splitter").value)}
 ROSETA: ${toNA($("roseta").value)}
 MANGUITA: ${toNA($("manguita").value)}
+COUPLE: ${toNA($("couple").value)}
 METRAJE UTP: ${toNA($("utp").value)}
 METRAJE DROP: ${toNA($("drop").value)}
 METRAJE COAXIAL: ${toNA($("coaxial").value)}
@@ -245,8 +323,20 @@ MASTIL: ${toNA($("mastil").value)}
 GRAPAS y CLAVOS: ${toNA($("grapas").value)}
 Ramplug y Tornillos: ${toNA($("ramplug").value)}
 TÉCNICOS: ${(()=>{
-  const otros= $("otroNombre").style.display==="block"?$("otroNombre").value.trim():"";
-  return (tecnicosSeleccionados.concat(otros?otros.split(","):[])).filter(Boolean).join(" - ")||"n/a";
+  const tecnicosFinales = [];
+  tecnicosSeleccionados.forEach(t => {
+    if (t !== "Otro") {
+      tecnicosFinales.push(t);
+    }
+  });
+
+  const otroNombreInput = $("otroNombre");
+  if (otroNombreInput.style.display === "block" && otroNombreInput.value.trim() !== "") {
+    const nombresExtra = otroNombreInput.value.trim().split(",").map(s => s.trim());
+    tecnicosFinales.push(...nombresExtra);
+  }
+
+  return tecnicosFinales.filter(Boolean).join(" - ") || "n/a";
 })()}
 Cobrar: ${toNA($("cobro").value)}
 
@@ -254,14 +344,14 @@ Observación:
 ${(()=>{
   let obs=$("observacion").value.trim();
   if(tipo==="instalacion"){return obs===""||obs==="0"?"Se realizó la instalación quedando con servicio operativo.":obs;}
-  if(tipo==="soporte"){if(obs===""||obs==="0"){alert("Debes escribir observación en soporte");throw "no";}return obs;}
+  if(tipo==="soporte"){if(obs===""||obs==="0"){myAlert("Debes escribir observación en soporte");throw "no";}return obs;}
 })()}`;
   $("resultado").textContent=txt;
 };
 $("btnCopiar").onclick=async()=>{
-  const t=$("resultado").textContent;if(!t){alert("Genera primero");return;}
-  try{await navigator.clipboard.writeText(t);alert("Copiado ✅");}
-  catch{const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);alert("Copiado ✅");}
+  const t=$("resultado").textContent;if(!t){myAlert("Genera primero");return;}
+  try{await navigator.clipboard.writeText(t);myAlert("Copiado ✅");}
+  catch{const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);myAlert("Copiado ✅");}
 };
 $("btnNuevo").onclick=()=>{
   document.querySelectorAll("input,textarea").forEach(el=>{if(el.type!=="button")el.value="";});
@@ -271,6 +361,56 @@ $("btnNuevo").onclick=()=>{
   setHoraAhora("horaInicio");
 };
 setHoraAhora("horaInicio");
+
+
+let html5QrCodeScanner;
+
+// Función para configurar y iniciar el escáner QR
+function setupQRScanner() {
+  const modal = $("qrModal");
+  modal.style.display = "flex";
+  
+  html5QrCodeScanner = new Html5QrcodeScanner("scanner-container", { fps: 10, qrbox: 250 });
+  html5QrCodeScanner.render(onScanSuccess, onScanFailure);
+}
+
+// Se ejecuta cuando se escanea un código correctamente
+const onScanSuccess = (decodedText) => {
+  console.log(`Scan result: ${decodedText}`);
+  const match = decodedText.match(/PON SN:(\S+)/);
+  if (match && match[1]) {
+    $("serial").value = match[1];
+    showAlert("PON SN: extraído con éxito.");
+  } else {
+    showAlert("No se encontró 'PON SN:' en el código QR.");
+  }
+  html5QrCodeScanner.clear().then(() => {
+    $("qrModal").style.display = "none";
+  });
+};
+
+// Se ejecuta si el escaneo falla o se detiene
+const onScanFailure = (error) => {
+  // console.warn(`Code scan error = ${error}`);
+};
+
+// Evento para abrir el escáner
+$("btnScanQR").onclick = () => {
+    setupQRScanner();
+};
+
+// Evento para cerrar el modal del escáner
+$("btnCloseScanner").onclick = () => {
+    if (html5QrCodeScanner) {
+        html5QrCodeScanner.clear().then(() => {
+            $("qrModal").style.display = "none";
+        }).catch(err => {
+            console.error("Error al detener el escáner:", err);
+            $("qrModal").style.display = "none";
+        });
+    }
+};
+
 </script>
 </body>
 </html>
