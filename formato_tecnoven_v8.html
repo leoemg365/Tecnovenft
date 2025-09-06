@@ -827,15 +827,19 @@ function setupQRScanner(serialInputId) {
   };
   html5QrCodeScanner = new Html5QrcodeScanner("scanner-container", config);
   html5QrCodeScanner.render((decodedText) => {
-    console.log(`Scan result: ${decodedText}`);
+    // Intenta extraer el serial si tiene el formato "PON SN:..."
     const match = decodedText.match(/PON SN:(\S+)/);
+    let serialToUse = decodedText;
     if (match && match[1]) {
-      $(serialInputId).value = match[1];
+      serialToUse = match[1];
       showAlert("PON SN: extraído con éxito.");
     } else {
-      showAlert("No se encontró 'PON SN:' en el código. Se copió el texto completo.");
-      $(serialInputId).value = decodedText;
+      // Si no, asume que el texto completo es el serial, ideal para códigos de barras
+      showAlert("Código escaneado. Utilizando el texto completo.");
     }
+
+    $(serialInputId).value = serialToUse;
+
     html5QrCodeScanner.clear().then(() => {
       $("qrModal").style.display = "none";
     });
