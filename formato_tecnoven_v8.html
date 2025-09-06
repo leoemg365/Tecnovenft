@@ -768,29 +768,52 @@ $("btnNuevoSol").onclick = () => {
 
 let html5QrCodeScanner;
 function setupQRScanner(serialInputId) {
-  const modal = $("qrModal");
-  modal.style.display = "flex";
-  const config = { 
-    fps: 10, 
-    qrbox: 250, 
-    cameraConfig: {
-      facingMode: { exact: "environment" }
-    }
+  $("qrModal").style.display = "flex";
+
+  const config = {
+    fps: 10,
+    qrbox: 250,
+    formatsToSupport: [
+      Html5QrcodeSupportedFormats.QR_CODE,
+      Html5QrcodeSupportedFormats.CODE_128,
+      Html5QrcodeSupportedFormats.CODE_39,
+      Html5QrcodeSupportedFormats.EAN_13,
+      Html5QrcodeSupportedFormats.EAN_8,
+      Html5QrcodeSupportedFormats.UPC_A,
+      Html5QrcodeSupportedFormats.UPC_E
+    ]
   };
-  html5QrCodeScanner = new Html5QrcodeScanner("scanner-container", config);
-  html5QrCodeScanner.render((decodedText) => {
-    console.log(`Scan result: ${decodedText}`);
-    const match = decodedText.match(/PON SN:(\S+)/);
-    if (match && match[1]) {
-      $(serialInputId).value = match[1];
-      showAlert("PON SN: extraído con éxito.");
-    } else {
-      showAlert("No se encontró 'PON SN:' en el código QR.");
+
+  const scanner = new Html5Qrcode("scanner-container");
+
+  scanner.start({ facingMode: "environment" }, config, (decodedText) => {
+    console.log("Escaneado:", decodedText);
+
+    let ponSN = null;
+
+    // Caso 1: QR con varias líneas
+    const ponMatch = decodedText.match(/PON SN[:\s]*([A-Za-z0-9\-]+)/i);
+    if (ponMatch && ponMatch[1]) {
+      ponSN = ponMatch[1].trim();
     }
-    html5QrCodeScanner.clear().then(() => {
+
+    // Caso 2: Código de barras con serial directo
+    if (!ponSN && decodedText.match(/^[A-Za-z0-9\-]{6,}$/)) {
+      ponSN = decodedText.trim();
+    }
+
+    if (ponSN) {
+      $(serialInputId).value = ponSN;
+      showAlert("✅ Serial capturado: " + ponSN);
+    } else {
+      showAlert("⚠️ No se encontró PON SN válido");
+    }
+
+    scanner.stop().then(() => {
       $("qrModal").style.display = "none";
     });
-  }, (error) => {});
+  });
+}
 }
 $("btnScanQRInst").onclick = () => setupQRScanner("serialInst");
 $("btnScanQRAct").onclick = () => setupQRScanner("serialAct");
@@ -814,3 +837,4 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
