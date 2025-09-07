@@ -229,7 +229,7 @@
 </head>
 <body>
 
-  <<!-- Barra de navegación de pestañas -->
+  <!-- Barra de navegación de pestañas -->
   <nav class="tab-nav">
     <a href="#" class="nav-link" data-target="ficha-instalacion">Ficha de Instalación</a>
     <a href="#" class="nav-link" data-target="proceso-activacion">Proceso de Activación</a>
