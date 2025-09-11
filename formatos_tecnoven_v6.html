@@ -229,15 +229,21 @@
 </head>
 <body>
 
-  <!-- Barra de navegación de pestañas -->
-  <nav class="tab-nav">
-    <a href="#" class="nav-link" data-target="ficha-instalacion">Ficha de Instalación</a>
-    <a href="#" class="nav-link" data-target="proceso-activacion">Proceso de Activación</a>
-    <a href="#" class="nav-link" data-target="solicitud">Solicitud</a>
-  </nav>
+  <!-- Menu de navegación lateral -->
+  <div class="nav-menu">
+    <h3>Formatos</h3>
+    <ul>
+      <li><a href="#" class="nav-link" data-target="ficha-instalacion">Ficha de Instalación</a></li>
+      <li><a href="#" class="nav-link" data-target="proceso-activacion">Proceso de Activación</a></li>
+      <li><a href="#" class="nav-link" data-target="solicitud">Solicitud</a></li>
+    </ul>
+  </div>
 
   <div class="main-content">
-  
+    <header class="header">
+      <h1>Tecnoven Formatos</h1>
+      <button class="menu-toggle">Menú</button>
+    </header>
 
     <!-- Sección de Ficha de Instalación -->
     <div id="ficha-instalacion" class="content-section">
@@ -595,11 +601,18 @@ function getReportData() {
     const nombresExtra = otroNombreInput.value.trim().split(",").map(s => s.trim());
     tecnicosFinales.push(...nombresExtra);
   }
-  const observacion = $("observacion").value.trim() || (tipo === "instalacion" ? "Se realizó la instalación quedando con servicio operativo." : "");
+  
+  const observacionInput = $("observacion");
+  const observacion = observacionInput.value.trim() || (tipo === "instalacion" ? "Se realizó la instalación quedando con servicio operativo." : "");
+  
   if (tipo === "soporte" && observacion === "") {
-    showAlert("Debes escribir observación en soporte");
+    showAlert("Debes escribir una observación en soporte");
+    observacionInput.focus();
+    observacionInput.style.border = "2px solid red";
+    observacionInput.style.backgroundColor = "#fff0f0";
     return null;
   }
+
   return {
     tipoTrabajo: tipo,
     servicio: serv,
@@ -633,6 +646,11 @@ function getReportData() {
     timestamp: new Date().toISOString()
   };
 }
+
+$("observacion").addEventListener('input', () => {
+  $("observacion").style.border = "";
+  $("observacion").style.backgroundColor = "";
+});
 
 $("btnGenerarInst").onclick=()=>{
   const data = getReportData();
