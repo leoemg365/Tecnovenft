@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tecnoven Formatos</title>
+  <!-- Biblioteca para escanear QR -->
   <script src="https://unpkg.com/html5-qrcode"></script>
   <style>
     :root{
@@ -11,7 +12,7 @@
       --vino-2:#6d1433;
       --card:#ffffff;
       --ink:#111;
-      --muted:#ffffff;
+      --muted:#f5f5f5;
       --accent:#4b0e20;
     }
     *{box-sizing:border-box}
@@ -21,16 +22,51 @@
       background:linear-gradient(160deg, var(--vino), #2a0a14 100%);
       color:#fff;
       display:flex;
+      flex-direction: column;
       padding:12px;
       gap: 12px;
     }
+    .header {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      color: white;
+      z-index: 101;
+    }
+    .header h1 {
+        font-size: 1.5rem;
+        margin: 0;
+        font-weight: 700;
+    }
+    .menu-toggle {
+      font-size: 1rem;
+      background: var(--vino-2);
+      border: none;
+      color: white;
+      cursor: pointer;
+      line-height: 1;
+      padding: 8px 16px;
+      border-radius: 8px;
+      z-index: 102;
+    }
     .nav-menu {
-      background: var(--card);
-      border-radius: 16px;
-      padding: 18px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
       width: 250px;
-      flex-shrink: 0;
-      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+      background: var(--card);
+      border-right: 1px solid #ddd;
+      padding: 18px;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 100;
+      color: var(--ink);
+    }
+    .nav-menu.active {
+      transform: translateX(0);
     }
     .nav-menu h3 {
       text-align: center;
@@ -58,21 +94,39 @@
       background: var(--vino);
       color: #fff;
     }
-
     .main-content {
       flex-grow: 1;
-      max-width: 560px;
       background:var(--card);
       color:var(--ink);
       border-radius:16px;
       box-shadow:0 8px 28px rgba(0, 217, 255, 0.4);
       padding:18px;
+      margin-top: -65px; /* Ajuste para cabecera móvil */
     }
     .content-section {
       display: none;
     }
     .content-section.active {
       display: block;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        flex-direction: row;
+      }
+      .header {
+        display: none;
+      }
+      .nav-menu {
+        position: relative;
+        transform: translateX(0);
+        width: 250px;
+        flex-shrink: 0;
+      }
+      .main-content {
+        max-width: 560px;
+        margin-top: 0;
+      }
     }
 
     h2{text-align:center;color:var(--vino);margin-top:0}
@@ -179,16 +233,20 @@
   <nav class="nav-menu">
     <h3>Formatos</h3>
     <ul>
-      <li><a href="#" class="nav-link active" data-target="ficha-instalacion">Ficha de Instalación</a></li>
+      <li><a href="#" class="nav-link" data-target="ficha-instalacion">Ficha de Instalación</a></li>
       <li><a href="#" class="nav-link" data-target="proceso-activacion">Proceso de Activación</a></li>
       <li><a href="#" class="nav-link" data-target="solicitud">Solicitud</a></li>
     </ul>
   </nav>
 
   <div class="main-content">
+    <header class="header">
+      <h1>Tecnoven Formatos</h1>
+      <button class="menu-toggle">Menú</button>
+    </header>
 
     <!-- Sección de Ficha de Instalación -->
-    <div id="ficha-instalacion" class="content-section active">
+    <div id="ficha-instalacion" class="content-section">
       <h2>Ficha de Instalación</h2>
       <div class="highlight-block">
         <label for="tipoTrabajo">Tipo de trabajo</label>
@@ -243,56 +301,56 @@
       </select>
       <label>Potencia</label><input id="potencia">
       <label>Conector APC</label>
-      <div id="apc-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="apc" data-action="decrease">-</button>
         <span data-type="apc">0</span>
         <button data-type="apc" data-action="increase">+</button>
       </div>
       <label>Conector UPC</label>
-      <div id="upc-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="upc" data-action="decrease">-</button>
         <span data-type="upc">0</span>
         <button data-type="upc" data-action="increase">+</button>
       </div>
       <label>Conector RG6</label>
-      <div id="rg6-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="rg6" data-action="decrease">-</button>
         <span data-type="rg6">0</span>
         <button data-type="rg6" data-action="increase">+</button>
       </div>
       <label>Conector RJ45</label>
-      <div id="rj45-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="rj45" data-action="decrease">-</button>
         <span data-type="rj45">0</span>
         <button data-type="rj45" data-action="increase">+</button>
       </div>
       <label>Splitter TV</label>
-      <div id="splitter-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="splitter" data-action="decrease">-</button>
         <span data-type="splitter">0</span>
         <button data-type="splitter" data-action="increase">+</button>
       </div>
       <label>Roseta</label>
-      <div id="roseta-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="roseta" data-action="decrease">-</button>
         <span data-type="roseta">0</span>
         <button data-type="roseta" data-action="increase">+</button>
       </div>
       <label>Manguita</label>
-      <div id="manguita-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="manguita" data-action="decrease">-</button>
         <span data-type="manguita">0</span>
         <button data-type="manguita" data-action="increase">+</button>
       </div>
       <label>Couple</label>
-      <div id="couple-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="couple" data-action="decrease">-</button>
         <span data-type="couple">0</span>
         <button data-type="couple" data-action="increase">+</button>
       </div>
       <label>Metraje UTP</label>
       <div class="metraje-input-group">
-        <div id="utp-counter" class="counter-control">
+        <div class="counter-control">
           <button data-type="utp" data-action="decrease">-</button>
           <span data-type="utp">0</span>
           <button data-type="utp" data-action="increase">+</button>
@@ -301,7 +359,7 @@
       </div>
       <label>Metraje Drop</label>
       <div class="metraje-input-group">
-        <div id="drop-counter" class="counter-control">
+        <div class="counter-control">
           <button data-type="drop" data-action="decrease">-</button>
           <span data-type="drop">0</span>
           <button data-type="drop" data-action="increase">+</button>
@@ -310,7 +368,7 @@
       </div>
       <label>Metraje Coaxial</label>
       <div class="metraje-input-group">
-        <div id="coaxial-counter" class="counter-control">
+        <div class="counter-control">
           <button data-type="coaxial" data-action="decrease">-</button>
           <span data-type="coaxial">0</span>
           <button data-type="coaxial" data-action="increase">+</button>
@@ -318,19 +376,19 @@
         <input type="number" id="coaxialManual" value="0">
       </div>
       <label>Mástil</label>
-      <div id="mastil-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="mastil" data-action="decrease">-</button>
         <span data-type="mastil">0</span>
         <button data-type="mastil" data-action="increase">+</button>
       </div>
       <label>Grapas y Clavos</label>
-      <div id="grapas-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="grapas" data-action="decrease">-</button>
         <span data-type="grapas">0</span>
         <button data-type="grapas" data-action="increase">+</button>
       </div>
       <label>Ramplug y Tornillos</label>
-      <div id="ramplug-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="ramplug" data-action="decrease">-</button>
         <span data-type="ramplug">0</span>
         <button data-type="ramplug" data-action="increase">+</button>
@@ -404,6 +462,7 @@
       <div class="actions">
         <button class="btn" id="btnGenerarAct">Generar</button>
         <button class="btn" id="btnCopiarAct">Copiar</button>
+        <button class="btn alt" id="btnNuevoAct">Nuevo Formato</button>
       </div>
       <div class="output" id="resultadoAct"></div>
     </div>
@@ -432,6 +491,7 @@
       <div class="actions">
         <button class="btn" id="btnGenerarSol">Generar</button>
         <button class="btn" id="btnCopiarSol">Copiar</button>
+        <button class="btn alt" id="btnNuevoSol">Nuevo Formato</button>
       </div>
       <div class="output" id="resultadoSol"></div>
     </div>
@@ -440,14 +500,9 @@
   <!-- Modal para el escáner QR -->
   <div class="modal-overlay" id="qrModal">
     <div class="modal-content">
-      <h3 class="text-xl font-bold mb-4">Escanear código QR
-
-
-[Image of a QR code scanner]
-
-</h3>
+      <h3>Escanear código QR</h3>
       <div id="scanner-container"></div>
-      <button class="btn mt-4" id="btnCloseScanner">Cerrar</button>
+      <button class="btn" id="btnCloseScanner">Cerrar</button>
     </div>
   </div>
   <!-- Contenedor para mensajes de alerta -->
@@ -455,18 +510,36 @@
 
 <script>
 const $ = id => document.getElementById(id);
+const navMenu = document.querySelector('.nav-menu');
+const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelectorAll('.nav-link');
 const contentSections = document.querySelectorAll('.content-section');
+
+// Lógica de navegación SPA
+function showSection(targetId) {
+    navLinks.forEach(l => l.classList.remove('active'));
+    contentSections.forEach(section => section.classList.remove('active'));
+    
+    document.querySelector(`.nav-link[data-target="${targetId}"]`).classList.add('active');
+    $(targetId).classList.add('active');
+}
+
 navLinks.forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
-    navLinks.forEach(l => l.classList.remove('active'));
-    link.classList.add('active');
-    contentSections.forEach(section => section.classList.remove('active'));
     const targetId = link.dataset.target;
-    $(targetId).classList.add('active');
+    showSection(targetId);
+    if (window.innerWidth < 768) {
+      navMenu.classList.remove('active');
+    }
   });
 });
+
+menuToggle.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+});
+
+// Funciones de utilidad
 function showAlert(message) {
     const box = $("messageBox");
     box.textContent = message;
@@ -477,11 +550,12 @@ function toNA(v){v=(v||"").trim();return (v===""||v==="0")?"n/a":v;}
 function formatFecha(v){v=toNA(v);if(v==="n/a")return v;v=v.replace(/-/g,"/").replace(/\s+/g,"/");const p=v.split("/");if(p.length===3){return p[0].padStart(2,"0")+"/"+p[1].padStart(2,"0")+"/"+p[2];}return v;}
 function formatHora(v){v=toNA(v);if(v==="n/a")return v;const p=v.split(" ");if(p.length===2){let h=parseInt(p[0]);let m=p[1].padStart(2,"0");let suf=h>=12?"PM":"AM";if(h>12)h-=12;if(h===0)h=12;return h+":"+m+suf;}return v;}
 function setHoraAhora(id){const d=new Date();$(id).value=d.getHours()+" "+String(d.getMinutes()).padStart(2,"0");}
-// Lógica para Ficha de Instalación
-const formFieldsInst = ['tipoTrabajo', 'servicio', 'fecha', 'cliente', 'horaInicio', 'horaFin', 'serialInst', 'napRegionInst', 'napNumberInst', 'puertoInst', 'potencia', 'otroNombre', 'cobro', 'observacion'];
+
+// --- Lógica para Ficha de Instalación ---
 const metrajeManualFieldsInst = ['utpManual', 'dropManual', 'coaxialManual'];
 const counterFieldsInst = ['apc', 'upc', 'rg6', 'rj45', 'splitter', 'roseta', 'manguita', 'couple', 'utp', 'drop', 'coaxial', 'mastil', 'grapas', 'ramplug'];
 let tecnicosSeleccionados=[];
+
 function renderChips(){
   const c=$("chipsContainer");c.innerHTML="";
   tecnicosSeleccionados.forEach((t,i)=>{
@@ -493,22 +567,45 @@ function renderChips(){
   });
   $("otroNombre").style.display=tecnicosSeleccionados.includes("Otro")?"block":"none";
 }
+
 $("tecnicosSelect").onchange=()=>{
   const v=$("tecnicosSelect").value;if(v && !tecnicosSeleccionados.includes(v)){tecnicosSeleccionados.push(v);renderChips();}
   $("tecnicosSelect").value="";
 };
+
 $("btnFecha").onclick=()=>{const d=new Date();$("fecha").value=("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear();}
 $("btnAhoraIni").onclick=()=>setHoraAhora("horaInicio");
 $("btnAhoraFin").onclick=()=>setHoraAhora("horaFin");
+
+// Limpiar el estilo de error al escribir
+$("observacion").addEventListener('input', () => {
+  $("observacion").style.border = "";
+  $("observacion").style.backgroundColor = "";
+});
+
 $("btnGenerarInst").onclick=()=>{
   const tipo=$("tipoTrabajo").value;
-  const serv=$("servicio").value==="Ambos"?"Internet + TV":$("servicio").value;
+  const observacionInput = $("observacion");
+  const observacionValue = observacionInput.value.trim();
+
+  // 1. VALIDACIÓN PRIMERO
+  if (tipo === "soporte" && (observacionValue === "" || observacionValue === "0")) {
+      showAlert("Debes escribir una observación en soporte");
+      observacionInput.focus();
+      observacionInput.style.border = "2px solid red";
+      observacionInput.style.backgroundColor = "#fff0f0";
+      return; // Detiene la función aquí si hay un error
+  }
+
+  // 2. Si la validación pasa, recopilar todos los datos
+  const serv = $("servicio").value === "Ambos" ? "Internet + TV" : $("servicio").value;
   const napRegion = $("napRegionInst").value;
   const napNumber = $("napNumberInst").value;
   const napValue = napNumber ? `${napRegion}-${napNumber}` : "";
+  
   const counterValues = {};
   counterFieldsInst.forEach(type => {
-    const span = document.querySelector(`span[data-type="${type}"]`);
+    const span = document.querySelector(`#ficha-instalacion span[data-type="${type}"]`);
     if (metrajeManualFieldsInst.includes(`${type}Manual`)) {
         const manualInput = $(`${type}Manual`);
         counterValues[type] = manualInput ? manualInput.value : (span ? span.textContent : '0');
@@ -516,7 +613,26 @@ $("btnGenerarInst").onclick=()=>{
         counterValues[type] = span ? span.textContent : '0';
     }
   });
-  const txt=`TIPO DE TRABAJO: ${tipo==="instalacion"?"Instalación":"Soporte"}
+
+  const tecnicosFinales = [];
+  tecnicosSeleccionados.forEach(t => {
+    if (t !== "Otro") {
+      tecnicosFinales.push(t);
+    }
+  });
+  const otroNombreInput = $("otroNombre");
+  if (otroNombreInput.style.display === "block" && otroNombreInput.value.trim() !== "") {
+    const nombresExtra = otroNombreInput.value.trim().split(",").map(s => s.trim());
+    tecnicosFinales.push(...nombresExtra);
+  }
+  const tecnicosTexto = tecnicosFinales.filter(Boolean).join(" - ") || "n/a";
+
+  const observacionFinal = (tipo === "instalacion" && (observacionValue === "" || observacionValue === "0"))
+      ? "Se realizó la instalación quedando con servicio operativo."
+      : observacionValue;
+
+  // 3. Construir el texto final
+  const txt = `TIPO DE TRABAJO: ${tipo === "instalacion" ? "Instalación" : "Soporte"}
 INSTALACIÓN: ${serv}
 FECHA: ${formatFecha($("fecha").value)}
 NOMBRE DE CLIENTE: ${toNA($("cliente").value)}
@@ -540,40 +656,27 @@ METRAJE COAXIAL: ${toNA(counterValues.coaxial)}
 MASTIL: ${toNA(counterValues.mastil)}
 GRAPAS y CLAVOS: ${toNA(counterValues.grapas)}
 Ramplug y Tornillos: ${toNA(counterValues.ramplug)}
-TÉCNICOS: ${(()=>{
-  const tecnicosFinales = [];
-  tecnicosSeleccionados.forEach(t => {
-    if (t !== "Otro") {
-      tecnicosFinales.push(t);
-    }
-  });
-  const otroNombreInput = $("otroNombre");
-  if (otroNombreInput.style.display === "block" && otroNombreInput.value.trim() !== "") {
-    const nombresExtra = otroNombreInput.value.trim().split(",").map(s => s.trim());
-    tecnicosFinales.push(...nombresExtra);
-  }
-  return tecnicosFinales.filter(Boolean).join(" - ") || "n/a";
-})()}
+TÉCNICOS: ${tecnicosTexto}
 Cobrar: ${toNA($("cobro").value)}
 Observación:
-${(()=>{
-  let obs=$("observacion").value.trim();
-  if(tipo==="instalacion"){return obs===""||obs==="0"?"Se realizó la instalación quedando con servicio operativo.":obs;}
-  if(tipo==="soporte"){if(obs===""||obs==="0"){showAlert("Debes escribir observación en soporte");throw new Error("no");}return obs;}
-})()}`;
-  $("resultadoInst").textContent=txt;
+${observacionFinal}`;
+
+  // 4. Mostrar el resultado
+  $("resultadoInst").textContent = txt;
 };
+
 $("btnCopiarInst").onclick=async()=>{
   const t=$("resultadoInst").textContent;if(!t){showAlert("Genera primero");return;}
   try{await navigator.clipboard.writeText(t);showAlert("Copiado ✅");}
   catch{const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);showAlert("Copiado ✅");}
 };
+
 $("btnNuevoInst").onclick=()=>{
   document.querySelectorAll("#ficha-instalacion input, #ficha-instalacion textarea, #ficha-instalacion select").forEach(el=>{if(el.type!=="button")el.value="";});
   tecnicosSeleccionados=[];renderChips();
   $("resultadoInst").textContent="";
   counterFieldsInst.forEach(type => {
-    const span = document.querySelector(`span[data-type="${type}"]`);
+    const span = document.querySelector(`#ficha-instalacion span[data-type="${type}"]`);
     if (span) span.textContent = '0';
   });
   metrajeManualFieldsInst.forEach(id => {
@@ -583,35 +686,30 @@ $("btnNuevoInst").onclick=()=>{
   const d=new Date();$("fecha").value=("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear();
   setHoraAhora("horaInicio");
 };
-document.querySelectorAll('.counter-control button').forEach(button => {
+
+document.querySelectorAll('#ficha-instalacion .counter-control button').forEach(button => {
   button.addEventListener('click', (e) => {
     const type = e.target.dataset.type;
     const action = e.target.dataset.action;
+    const span = document.querySelector(`#ficha-instalacion span[data-type="${type}"]`);
+    let count = parseInt(span.textContent);
+
     const isMetraje = ['utp', 'drop', 'coaxial'].includes(type);
-    if (isMetraje) {
-      const manualInput = $(`${type}Manual`);
-      let count = parseInt(manualInput.value || 0);
-      if (action === 'increase') {
-        count += 10;
-      } else if (action === 'decrease') {
-        count = Math.max(0, count - 10);
-      }
-      manualInput.value = count;
-      const span = document.querySelector(`span[data-type="${type}"]`);
-      if (span) span.textContent = count;
+    const manualInput = $(`${type}Manual`);
+
+    if (isMetraje && manualInput) {
+        let manualCount = parseInt(manualInput.value || '0');
+        manualCount += (action === 'increase' ? 10 : -10);
+        manualInput.value = Math.max(0, manualCount);
+        span.textContent = manualInput.value;
     } else {
-      const span = document.querySelector(`span[data-type="${type}"]`);
-      let count = parseInt(span.textContent);
-      if (action === 'increase') {
-        count++;
-      } else if (action === 'decrease' && count > 0) {
-        count--;
-      }
-      span.textContent = count;
+        count += (action === 'increase' ? 1 : -1);
+        span.textContent = Math.max(0, count);
     }
   });
 });
-// Lógica para Proceso de Activación
+
+// --- Lógica para Proceso de Activación ---
 $("btnGenerarAct").onclick=()=>{
     const tipoActivacion = $("tipoActivacion").value;
     const cliente = $("clienteAct").value;
@@ -621,7 +719,7 @@ $("btnGenerarAct").onclick=()=>{
     const serial = $("serialAct").value;
     const outputText = `ACTIVACIÓN: ${tipoActivacion}
 NOMBRE DE CLIENTE: ${toNA(cliente)}
-NAP: ${toNA(napRegion + "-" + napNumber)}
+NAP: ${toNA(napRegion && napNumber ? napRegion + "-" + napNumber : "")}
 PUERTO: ${toNA(puerto)}
 SERIAL: ${toNA(serial)}
 `;
@@ -629,25 +727,16 @@ SERIAL: ${toNA(serial)}
 };
 $("btnCopiarAct").onclick=async()=>{
     const t=$("resultadoAct").textContent;
-    if(!t){
-      showAlert("Genera el reporte primero.");
-      return;
-    }
-    try{
-      await navigator.clipboard.writeText(t);
-      showAlert("Copiado al portapapeles ✅");
-    } catch(err) {
-      const ta=document.createElement("textarea");
-      ta.value=t;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      document.body.removeChild(ta);
-      showAlert("Copiado al portapapeles ✅");
-    }
+    if(!t){showAlert("Genera el reporte primero.");return;}
+    try{await navigator.clipboard.writeText(t);showAlert("Copiado al portapapeles ✅");} 
+    catch(err) { const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);showAlert("Copiado al portapapeles ✅");}
+};
+$("btnNuevoAct").onclick = () => {
+    document.querySelectorAll("#proceso-activacion input, #proceso-activacion select").forEach(el => {if (el.type !== "button") el.value = "";});
+    $("resultadoAct").textContent = "";
 };
 
-// Lógica para Solicitud
+// --- Lógica para Solicitud ---
 $("btnGenerarSol").onclick = () => {
     const servicio = $("servicioSol").value;
     const napRegion = $("napRegionSol").value;
@@ -655,73 +744,70 @@ $("btnGenerarSol").onclick = () => {
     const cliente = $("clienteSol").value;
     const outputText = `SOLICITUD DE TRABAJO
 Servicio: ${toNA(servicio)}
-NAP: ${toNA(napRegion + "-" + napNumber)}
+NAP: ${toNA(napRegion && napNumber ? napRegion + "-" + napNumber : "")}
 Nombre: ${toNA(cliente)}
 `;
     $("resultadoSol").textContent = outputText;
 };
-
 $("btnCopiarSol").onclick = async () => {
     const t = $("resultadoSol").textContent;
-    if (!t) {
-        showAlert("Genera el reporte primero.");
-        return;
-    }
-    try {
-        await navigator.clipboard.writeText(t);
-        showAlert("Copiado al portapapeles ✅");
-    } catch (err) {
-        const ta = document.createElement("textarea");
-        ta.value = t;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-        showAlert("Copiado al portapapeles ✅");
-    }
+    if (!t){showAlert("Genera el reporte primero.");return;}
+    try {await navigator.clipboard.writeText(t);showAlert("Copiado al portapapeles ✅");} 
+    catch (err) {const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);showAlert("Copiado al portapapeles ✅");}
+};
+$("btnNuevoSol").onclick = () => {
+    document.querySelectorAll("#solicitud input, #solicitud select").forEach(el => {if (el.type !== "button") el.value = "";});
+    $("resultadoSol").textContent = "";
 };
 
+// --- Lógica del Escáner QR ---
 let html5QrCodeScanner;
 function setupQRScanner(serialInputId) {
   const modal = $("qrModal");
   modal.style.display = "flex";
-  const config = { 
-    fps: 10, 
-    qrbox: 250, 
-    cameraConfig: {
-      facingMode: { exact: "environment" }
-    }
+  const config = {
+    fps: 10,
+    qrbox: 250,
   };
-  html5QrCodeScanner = new Html5QrcodeScanner("scanner-container", config);
-  html5QrCodeScanner.render((decodedText) => {
-    console.log(`Scan result: ${decodedText}`);
+  html5QrCodeScanner = new Html5Qrcode("scanner-container");
+  html5QrCodeScanner.start({ facingMode: "environment" }, config, (decodedText) => {
     const match = decodedText.match(/PON SN:(\S+)/);
+    let serialToUse = decodedText;
     if (match && match[1]) {
-      $(serialInputId).value = match[1];
+      serialToUse = match[1];
       showAlert("PON SN: extraído con éxito.");
     } else {
-      showAlert("No se encontró 'PON SN:' en el código QR.");
+      showAlert("Código escaneado. Utilizando el texto completo.");
     }
-    html5QrCodeScanner.clear().then(() => {
+    $(serialInputId).value = serialToUse;
+    closeScanner();
+  }).catch(err => console.error("Error al iniciar escáner:", err));
+}
+function closeScanner() {
+  if (html5QrCodeScanner && html5QrCodeScanner.isScanning) {
+    html5QrCodeScanner.stop().then(() => {
+      $("qrModal").style.display = "none";
+    }).catch(err => {
+      console.error("Error al detener el escáner:", err);
       $("qrModal").style.display = "none";
     });
-  }, (error) => {});
+  } else {
+    $("qrModal").style.display = "none";
+  }
 }
 $("btnScanQRInst").onclick = () => setupQRScanner("serialInst");
 $("btnScanQRAct").onclick = () => setupQRScanner("serialAct");
-$("btnCloseScanner").onclick = () => {
-    if (html5QrCodeScanner) {
-        html5QrCodeScanner.clear().then(() => {
-            $("qrModal").style.display = "none";
-        }).catch(err => {
-            console.error("Error al detener el escáner:", err);
-            $("qrModal").style.display = "none";
-        });
-    }
-};
-// Establecer el estado inicial
-setHoraAhora("horaInicio");
-renderChips();
+$("btnCloseScanner").onclick = closeScanner;
+
+// --- Estado Inicial de la Página ---
+document.addEventListener('DOMContentLoaded', () => {
+    showSection('ficha-instalacion');
+    const d=new Date();$("fecha").value=("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear();
+    setHoraAhora("horaInicio");
+    renderChips();
+});
 </script>
 </body>
 </html>
+
+
