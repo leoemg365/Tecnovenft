@@ -63,7 +63,7 @@
       transform: translateX(-100%);
       transition: transform 0.3s ease-in-out;
       z-index: 100;
-      color: var(--ink); /* Added for visibility */
+      color: var(--ink);
     }
     .nav-menu.active {
       transform: translateX(0);
@@ -101,7 +101,7 @@
       border-radius:16px;
       box-shadow:0 8px 28px rgba(0, 217, 255, 0.4);
       padding:18px;
-      margin-top: -65px;
+      margin-top: -65px; /* Ajuste para cabecera móvil */
     }
     .content-section {
       display: none;
@@ -230,14 +230,14 @@
 <body>
 
   <!-- Menu de navegación lateral -->
-  <div class="nav-menu">
+  <nav class="nav-menu">
     <h3>Formatos</h3>
     <ul>
       <li><a href="#" class="nav-link" data-target="ficha-instalacion">Ficha de Instalación</a></li>
       <li><a href="#" class="nav-link" data-target="proceso-activacion">Proceso de Activación</a></li>
       <li><a href="#" class="nav-link" data-target="solicitud">Solicitud</a></li>
     </ul>
-  </div>
+  </nav>
 
   <div class="main-content">
     <header class="header">
@@ -301,56 +301,56 @@
       </select>
       <label>Potencia</label><input id="potencia">
       <label>Conector APC</label>
-      <div id="apc-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="apc" data-action="decrease">-</button>
         <span data-type="apc">0</span>
         <button data-type="apc" data-action="increase">+</button>
       </div>
       <label>Conector UPC</label>
-      <div id="upc-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="upc" data-action="decrease">-</button>
         <span data-type="upc">0</span>
         <button data-type="upc" data-action="increase">+</button>
       </div>
       <label>Conector RG6</label>
-      <div id="rg6-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="rg6" data-action="decrease">-</button>
         <span data-type="rg6">0</span>
         <button data-type="rg6" data-action="increase">+</button>
       </div>
       <label>Conector RJ45</label>
-      <div id="rj45-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="rj45" data-action="decrease">-</button>
         <span data-type="rj45">0</span>
         <button data-type="rj45" data-action="increase">+</button>
       </div>
       <label>Splitter TV</label>
-      <div id="splitter-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="splitter" data-action="decrease">-</button>
         <span data-type="splitter">0</span>
         <button data-type="splitter" data-action="increase">+</button>
       </div>
       <label>Roseta</label>
-      <div id="roseta-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="roseta" data-action="decrease">-</button>
         <span data-type="roseta">0</span>
         <button data-type="roseta" data-action="increase">+</button>
       </div>
       <label>Manguita</label>
-      <div id="manguita-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="manguita" data-action="decrease">-</button>
         <span data-type="manguita">0</span>
         <button data-type="manguita" data-action="increase">+</button>
       </div>
       <label>Couple</label>
-      <div id="couple-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="couple" data-action="decrease">-</button>
         <span data-type="couple">0</span>
         <button data-type="couple" data-action="increase">+</button>
       </div>
       <label>Metraje UTP</label>
       <div class="metraje-input-group">
-        <div id="utp-counter" class="counter-control">
+        <div class="counter-control">
           <button data-type="utp" data-action="decrease">-</button>
           <span data-type="utp">0</span>
           <button data-type="utp" data-action="increase">+</button>
@@ -359,7 +359,7 @@
       </div>
       <label>Metraje Drop</label>
       <div class="metraje-input-group">
-        <div id="drop-counter" class="counter-control">
+        <div class="counter-control">
           <button data-type="drop" data-action="decrease">-</button>
           <span data-type="drop">0</span>
           <button data-type="drop" data-action="increase">+</button>
@@ -368,7 +368,7 @@
       </div>
       <label>Metraje Coaxial</label>
       <div class="metraje-input-group">
-        <div id="coaxial-counter" class="counter-control">
+        <div class="counter-control">
           <button data-type="coaxial" data-action="decrease">-</button>
           <span data-type="coaxial">0</span>
           <button data-type="coaxial" data-action="increase">+</button>
@@ -376,19 +376,19 @@
         <input type="number" id="coaxialManual" value="0">
       </div>
       <label>Mástil</label>
-      <div id="mastil-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="mastil" data-action="decrease">-</button>
         <span data-type="mastil">0</span>
         <button data-type="mastil" data-action="increase">+</button>
       </div>
       <label>Grapas y Clavos</label>
-      <div id="grapas-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="grapas" data-action="decrease">-</button>
         <span data-type="grapas">0</span>
         <button data-type="grapas" data-action="increase">+</button>
       </div>
       <label>Ramplug y Tornillos</label>
-      <div id="ramplug-counter" class="counter-control">
+      <div class="counter-control">
         <button data-type="ramplug" data-action="decrease">-</button>
         <span data-type="ramplug">0</span>
         <button data-type="ramplug" data-action="increase">+</button>
@@ -495,15 +495,14 @@
       </div>
       <div class="output" id="resultadoSol"></div>
     </div>
-
   </div>
 
   <!-- Modal para el escáner QR -->
   <div class="modal-overlay" id="qrModal">
     <div class="modal-content">
-      <h3 class="text-xl font-bold mb-4">Escanear código QR</h3>
+      <h3>Escanear código QR</h3>
       <div id="scanner-container"></div>
-      <button class="btn mt-4" id="btnCloseScanner">Cerrar</button>
+      <button class="btn" id="btnCloseScanner">Cerrar</button>
     </div>
   </div>
   <!-- Contenedor para mensajes de alerta -->
@@ -516,30 +515,31 @@ const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelectorAll('.nav-link');
 const contentSections = document.querySelectorAll('.content-section');
 
-menuToggle.addEventListener('click', () => {
-  navMenu.classList.toggle('active');
-});
-
+// Lógica de navegación SPA
 function showSection(targetId) {
+    navLinks.forEach(l => l.classList.remove('active'));
     contentSections.forEach(section => section.classList.remove('active'));
+    
+    document.querySelector(`.nav-link[data-target="${targetId}"]`).classList.add('active');
     $(targetId).classList.add('active');
-    navLinks.forEach(link => {
-      if (link.dataset.target === targetId) {
-        link.classList.add('active');
-      } else {
-        link.classList.remove('active');
-      }
-    });
 }
+
 navLinks.forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
     const targetId = link.dataset.target;
     showSection(targetId);
-    navMenu.classList.remove('active');
+    if (window.innerWidth < 768) {
+      navMenu.classList.remove('active');
+    }
   });
 });
 
+menuToggle.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+});
+
+// Funciones de utilidad
 function showAlert(message) {
     const box = $("messageBox");
     box.textContent = message;
@@ -550,11 +550,12 @@ function toNA(v){v=(v||"").trim();return (v===""||v==="0")?"n/a":v;}
 function formatFecha(v){v=toNA(v);if(v==="n/a")return v;v=v.replace(/-/g,"/").replace(/\s+/g,"/");const p=v.split("/");if(p.length===3){return p[0].padStart(2,"0")+"/"+p[1].padStart(2,"0")+"/"+p[2];}return v;}
 function formatHora(v){v=toNA(v);if(v==="n/a")return v;const p=v.split(" ");if(p.length===2){let h=parseInt(p[0]);let m=p[1].padStart(2,"0");let suf=h>=12?"PM":"AM";if(h>12)h-=12;if(h===0)h=12;return h+":"+m+suf;}return v;}
 function setHoraAhora(id){const d=new Date();$(id).value=d.getHours()+" "+String(d.getMinutes()).padStart(2,"0");}
-// Lógica para Ficha de Instalación
-const formFieldsInst = ['tipoTrabajo', 'servicio', 'fecha', 'cliente', 'horaInicio', 'horaFin', 'serialInst', 'napRegionInst', 'napNumberInst', 'puertoInst', 'potencia', 'otroNombre', 'cobro', 'observacion'];
+
+// --- Lógica para Ficha de Instalación ---
 const metrajeManualFieldsInst = ['utpManual', 'dropManual', 'coaxialManual'];
 const counterFieldsInst = ['apc', 'upc', 'rg6', 'rj45', 'splitter', 'roseta', 'manguita', 'couple', 'utp', 'drop', 'coaxial', 'mastil', 'grapas', 'ramplug'];
 let tecnicosSeleccionados=[];
+
 function renderChips(){
   const c=$("chipsContainer");c.innerHTML="";
   tecnicosSeleccionados.forEach((t,i)=>{
@@ -566,30 +567,53 @@ function renderChips(){
   });
   $("otroNombre").style.display=tecnicosSeleccionados.includes("Otro")?"block":"none";
 }
+
 $("tecnicosSelect").onchange=()=>{
-  const v=$("tecnicosSelect").value;if(v && !tecnicosSeleccionados.includes(v)){tecnicosSeleccionados.push(v);renderChips();};
+  const v=$("tecnicosSelect").value;if(v && !tecnicosSeleccionados.includes(v)){tecnicosSeleccionados.push(v);renderChips();}
   $("tecnicosSelect").value="";
 };
+
 $("btnFecha").onclick=()=>{const d=new Date();$("fecha").value=("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear();}
 $("btnAhoraIni").onclick=()=>setHoraAhora("horaInicio");
 $("btnAhoraFin").onclick=()=>setHoraAhora("horaFin");
 
-function getReportData() {
-  const tipo = $("tipoTrabajo").value;
+// Limpiar el estilo de error al escribir
+$("observacion").addEventListener('input', () => {
+  $("observacion").style.border = "";
+  $("observacion").style.backgroundColor = "";
+});
+
+$("btnGenerarInst").onclick=()=>{
+  const tipo=$("tipoTrabajo").value;
+  const observacionInput = $("observacion");
+  const observacionValue = observacionInput.value.trim();
+
+  // 1. VALIDACIÓN PRIMERO
+  if (tipo === "soporte" && (observacionValue === "" || observacionValue === "0")) {
+      showAlert("Debes escribir una observación en soporte");
+      observacionInput.focus();
+      observacionInput.style.border = "2px solid red";
+      observacionInput.style.backgroundColor = "#fff0f0";
+      return; // Detiene la función aquí si hay un error
+  }
+
+  // 2. Si la validación pasa, recopilar todos los datos
   const serv = $("servicio").value === "Ambos" ? "Internet + TV" : $("servicio").value;
   const napRegion = $("napRegionInst").value;
   const napNumber = $("napNumberInst").value;
   const napValue = napNumber ? `${napRegion}-${napNumber}` : "";
+  
   const counterValues = {};
   counterFieldsInst.forEach(type => {
-    const span = document.querySelector(`span[data-type="${type}"]`);
+    const span = document.querySelector(`#ficha-instalacion span[data-type="${type}"]`);
     if (metrajeManualFieldsInst.includes(`${type}Manual`)) {
         const manualInput = $(`${type}Manual`);
-        counterValues[type] = manualInput ? parseInt(manualInput.value, 10) : (span ? parseInt(span.textContent, 10) : 0);
+        counterValues[type] = manualInput ? manualInput.value : (span ? span.textContent : '0');
     } else {
-        counterValues[type] = span ? parseInt(span.textContent, 10) : 0;
+        counterValues[type] = span ? span.textContent : '0';
     }
   });
+
   const tecnicosFinales = [];
   tecnicosSeleccionados.forEach(t => {
     if (t !== "Otro") {
@@ -601,76 +625,43 @@ function getReportData() {
     const nombresExtra = otroNombreInput.value.trim().split(",").map(s => s.trim());
     tecnicosFinales.push(...nombresExtra);
   }
-  const observacion = $("observacion").value.trim() || (tipo === "instalacion" ? "Se realizó la instalación quedando con servicio operativo." : "");
-  if (tipo === "soporte" && observacion === "") {
-    showAlert("Debes escribir observación en soporte");
-    return null;
-  }
-  return {
-    tipoTrabajo: tipo,
-    servicio: serv,
-    fecha: formatFecha($("fecha").value),
-    cliente: toNA($("cliente").value),
-    horaInicio: formatHora($("horaInicio").value),
-    horaFin: formatHora($("horaFin").value),
-    serial: toNA($("serialInst").value),
-    nap: toNA(napValue),
-    puerto: toNA($("puertoInst").value),
-    potencia: toNA($("potencia").value),
-    materiales: {
-      apc: toNA(counterValues.apc),
-      upc: toNA(counterValues.upc),
-      rg6: toNA(counterValues.rg6),
-      rj45: toNA(counterValues.rj45),
-      splitter: toNA(counterValues.splitter),
-      roseta: toNA(counterValues.roseta),
-      manguita: toNA(counterValues.manguita),
-      couple: toNA(counterValues.couple),
-      utp: toNA(counterValues.utp),
-      drop: toNA(counterValues.drop),
-      coaxial: toNA(counterValues.coaxial),
-      mastil: toNA(counterValues.mastil),
-      grapas: toNA(counterValues.grapas),
-      ramplug: toNA(counterValues.ramplug),
-    },
-    tecnicos: tecnicosFinales.filter(Boolean).join(" - ") || "n/a",
-    cobro: toNA($("cobro").value),
-    observacion: observacion || "n/a",
-    timestamp: new Date().toISOString()
-  };
-}
+  const tecnicosTexto = tecnicosFinales.filter(Boolean).join(" - ") || "n/a";
 
-$("btnGenerarInst").onclick=()=>{
-  const data = getReportData();
-  if (!data) return;
-  const txt = `TIPO DE TRABAJO: ${data.tipoTrabajo === "instalacion" ? "Instalación" : "Soporte"}
-INSTALACIÓN: ${data.servicio}
-FECHA: ${data.fecha}
-NOMBRE DE CLIENTE: ${data.cliente}
-HORA INICIO: ${data.horaInicio}
-HORA FIN: ${data.horaFin}
-SERIAL: ${data.serial}
-NAP: ${data.nap}
-PUERTO: ${data.puerto}
-POTENCIA: ${data.potencia}
-CONECTOR APC: ${data.materiales.apc}
-CONECTOR UPC: ${data.materiales.upc}
-CONECTOR RG6: ${data.materiales.rg6}
-CONECTOR RJ45: ${data.materiales.rj45}
-SPLITTER TV: ${data.materiales.splitter}
-ROSETA: ${data.materiales.roseta}
-MANGUITA: ${data.materiales.manguita}
-COUPLE: ${data.materiales.couple}
-METRAJE UTP: ${data.materiales.utp}
-METRAJE DROP: ${data.materiales.drop}
-METRAJE COAXIAL: ${data.materiales.coaxial}
-MASTIL: ${data.materiales.mastil}
-GRAPAS y CLAVOS: ${data.materiales.grapas}
-Ramplug y Tornillos: ${data.materiales.ramplug}
-TÉCNICOS: ${data.tecnicos}
-Cobrar: ${data.cobro}
+  const observacionFinal = (tipo === "instalacion" && (observacionValue === "" || observacionValue === "0"))
+      ? "Se realizó la instalación quedando con servicio operativo."
+      : observacionValue;
+
+  // 3. Construir el texto final
+  const txt = `TIPO DE TRABAJO: ${tipo === "instalacion" ? "Instalación" : "Soporte"}
+INSTALACIÓN: ${serv}
+FECHA: ${formatFecha($("fecha").value)}
+NOMBRE DE CLIENTE: ${toNA($("cliente").value)}
+HORA INICIO: ${formatHora($("horaInicio").value)}
+HORA FIN: ${formatHora($("horaFin").value)}
+SERIAL: ${toNA($("serialInst").value)}
+NAP: ${toNA(napValue)}
+PUERTO: ${toNA($("puertoInst").value)}
+POTENCIA: ${toNA($("potencia").value)}
+CONECTOR APC: ${toNA(counterValues.apc)}
+CONECTOR UPC: ${toNA(counterValues.upc)}
+CONECTOR RG6: ${toNA(counterValues.rg6)}
+CONECTOR RJ45: ${toNA(counterValues.rj45)}
+SPLITTER TV: ${toNA(counterValues.splitter)}
+ROSETA: ${toNA(counterValues.roseta)}
+MANGUITA: ${toNA(counterValues.manguita)}
+COUPLE: ${toNA(counterValues.couple)}
+METRAJE UTP: ${toNA(counterValues.utp)}
+METRAJE DROP: ${toNA(counterValues.drop)}
+METRAJE COAXIAL: ${toNA(counterValues.coaxial)}
+MASTIL: ${toNA(counterValues.mastil)}
+GRAPAS y CLAVOS: ${toNA(counterValues.grapas)}
+Ramplug y Tornillos: ${toNA(counterValues.ramplug)}
+TÉCNICOS: ${tecnicosTexto}
+Cobrar: ${toNA($("cobro").value)}
 Observación:
-${data.observacion}`;
+${observacionFinal}`;
+
+  // 4. Mostrar el resultado
   $("resultadoInst").textContent = txt;
 };
 
@@ -679,12 +670,13 @@ $("btnCopiarInst").onclick=async()=>{
   try{await navigator.clipboard.writeText(t);showAlert("Copiado ✅");}
   catch{const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);showAlert("Copiado ✅");}
 };
+
 $("btnNuevoInst").onclick=()=>{
   document.querySelectorAll("#ficha-instalacion input, #ficha-instalacion textarea, #ficha-instalacion select").forEach(el=>{if(el.type!=="button")el.value="";});
   tecnicosSeleccionados=[];renderChips();
   $("resultadoInst").textContent="";
   counterFieldsInst.forEach(type => {
-    const span = document.querySelector(`span[data-type="${type}"]`);
+    const span = document.querySelector(`#ficha-instalacion span[data-type="${type}"]`);
     if (span) span.textContent = '0';
   });
   metrajeManualFieldsInst.forEach(id => {
@@ -694,35 +686,30 @@ $("btnNuevoInst").onclick=()=>{
   const d=new Date();$("fecha").value=("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear();
   setHoraAhora("horaInicio");
 };
-document.querySelectorAll('.counter-control button').forEach(button => {
+
+document.querySelectorAll('#ficha-instalacion .counter-control button').forEach(button => {
   button.addEventListener('click', (e) => {
     const type = e.target.dataset.type;
     const action = e.target.dataset.action;
+    const span = document.querySelector(`#ficha-instalacion span[data-type="${type}"]`);
+    let count = parseInt(span.textContent);
+
     const isMetraje = ['utp', 'drop', 'coaxial'].includes(type);
-    if (isMetraje) {
-      const manualInput = $(`${type}Manual`);
-      let count = parseInt(manualInput.value || 0);
-      if (action === 'increase') {
-        count += 10;
-      } else if (action === 'decrease') {
-        count = Math.max(0, count - 10);
-      }
-      manualInput.value = count;
-      const span = document.querySelector(`span[data-type="${type}"]`);
-      if (span) span.textContent = count;
+    const manualInput = $(`${type}Manual`);
+
+    if (isMetraje && manualInput) {
+        let manualCount = parseInt(manualInput.value || '0');
+        manualCount += (action === 'increase' ? 10 : -10);
+        manualInput.value = Math.max(0, manualCount);
+        span.textContent = manualInput.value;
     } else {
-      const span = document.querySelector(`span[data-type="${type}"]`);
-      let count = parseInt(span.textContent);
-      if (action === 'increase') {
-        count++;
-      } else if (action === 'decrease' && count > 0) {
-        count--;
-      }
-      span.textContent = count;
+        count += (action === 'increase' ? 1 : -1);
+        span.textContent = Math.max(0, count);
     }
   });
 });
-// Lógica para Proceso de Activación
+
+// --- Lógica para Proceso de Activación ---
 $("btnGenerarAct").onclick=()=>{
     const tipoActivacion = $("tipoActivacion").value;
     const cliente = $("clienteAct").value;
@@ -732,7 +719,7 @@ $("btnGenerarAct").onclick=()=>{
     const serial = $("serialAct").value;
     const outputText = `ACTIVACIÓN: ${tipoActivacion}
 NOMBRE DE CLIENTE: ${toNA(cliente)}
-NAP: ${toNA(napRegion + "-" + napNumber)}
+NAP: ${toNA(napRegion && napNumber ? napRegion + "-" + napNumber : "")}
 PUERTO: ${toNA(puerto)}
 SERIAL: ${toNA(serial)}
 `;
@@ -740,33 +727,16 @@ SERIAL: ${toNA(serial)}
 };
 $("btnCopiarAct").onclick=async()=>{
     const t=$("resultadoAct").textContent;
-    if(!t){
-      showAlert("Genera el reporte primero.");
-      return;
-    }
-    try{
-      await navigator.clipboard.writeText(t);
-      showAlert("Copiado al portapapeles ✅");
-    } catch(err) {
-      const ta=document.createElement("textarea");
-      ta.value=t;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      document.body.removeChild(ta);
-      showAlert("Copiado al portapapeles ✅");
-    }
+    if(!t){showAlert("Genera el reporte primero.");return;}
+    try{await navigator.clipboard.writeText(t);showAlert("Copiado al portapapeles ✅");} 
+    catch(err) { const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);showAlert("Copiado al portapapeles ✅");}
 };
 $("btnNuevoAct").onclick = () => {
-    document.querySelectorAll("#proceso-activacion input, #proceso-activacion select").forEach(el => {
-        if (el.type !== "button") {
-            el.value = "";
-        }
-    });
+    document.querySelectorAll("#proceso-activacion input, #proceso-activacion select").forEach(el => {if (el.type !== "button") el.value = "";});
     $("resultadoAct").textContent = "";
 };
 
-// Lógica para Solicitud
+// --- Lógica para Solicitud ---
 $("btnGenerarSol").onclick = () => {
     const servicio = $("servicioSol").value;
     const napRegion = $("napRegionSol").value;
@@ -774,40 +744,23 @@ $("btnGenerarSol").onclick = () => {
     const cliente = $("clienteSol").value;
     const outputText = `SOLICITUD DE TRABAJO
 Servicio: ${toNA(servicio)}
-NAP: ${toNA(napRegion + "-" + napNumber)}
+NAP: ${toNA(napRegion && napNumber ? napRegion + "-" + napNumber : "")}
 Nombre: ${toNA(cliente)}
 `;
     $("resultadoSol").textContent = outputText;
 };
-
 $("btnCopiarSol").onclick = async () => {
     const t = $("resultadoSol").textContent;
-    if (!t) {
-        showAlert("Genera el reporte primero.");
-        return;
-    }
-    try {
-        await navigator.clipboard.writeText(t);
-        showAlert("Copiado al portapapeles ✅");
-    } catch (err) {
-        const ta=document.createElement("textarea");
-        ta.value=t;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-        showAlert("Copiado al portapapeles ✅");
-    }
+    if (!t){showAlert("Genera el reporte primero.");return;}
+    try {await navigator.clipboard.writeText(t);showAlert("Copiado al portapapeles ✅");} 
+    catch (err) {const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);showAlert("Copiado al portapapeles ✅");}
 };
 $("btnNuevoSol").onclick = () => {
-    document.querySelectorAll("#solicitud input, #solicitud select").forEach(el => {
-        if (el.type !== "button") {
-            el.value = "";
-        }
-    });
+    document.querySelectorAll("#solicitud input, #solicitud select").forEach(el => {if (el.type !== "button") el.value = "";});
     $("resultadoSol").textContent = "";
 };
 
+// --- Lógica del Escáner QR ---
 let html5QrCodeScanner;
 function setupQRScanner(serialInputId) {
   const modal = $("qrModal");
@@ -815,49 +768,38 @@ function setupQRScanner(serialInputId) {
   const config = {
     fps: 10,
     qrbox: 250,
-    cameraConfig: {
-      facingMode: { exact: "environment" }
-    },
-    formatsToSupport: [
-      Html5QrcodeSupportedFormats.QR_CODE,
-      Html5QrcodeSupportedFormats.CODE_128,
-      Html5QrcodeSupportedFormats.EAN_13,
-      Html5QrcodeSupportedFormats.UPC_A,
-    ]
   };
-  html5QrCodeScanner = new Html5QrcodeScanner("scanner-container", config);
-  html5QrCodeScanner.render((decodedText) => {
-    // Intenta extraer el serial si tiene el formato "PON SN:..."
+  html5QrCodeScanner = new Html5Qrcode("scanner-container");
+  html5QrCodeScanner.start({ facingMode: "environment" }, config, (decodedText) => {
     const match = decodedText.match(/PON SN:(\S+)/);
     let serialToUse = decodedText;
     if (match && match[1]) {
       serialToUse = match[1];
       showAlert("PON SN: extraído con éxito.");
     } else {
-      // Si no, asume que el texto completo es el serial, ideal para códigos de barras
       showAlert("Código escaneado. Utilizando el texto completo.");
     }
-
     $(serialInputId).value = serialToUse;
-
-    html5QrCodeScanner.clear().then(() => {
+    closeScanner();
+  }).catch(err => console.error("Error al iniciar escáner:", err));
+}
+function closeScanner() {
+  if (html5QrCodeScanner && html5QrCodeScanner.isScanning) {
+    html5QrCodeScanner.stop().then(() => {
+      $("qrModal").style.display = "none";
+    }).catch(err => {
+      console.error("Error al detener el escáner:", err);
       $("qrModal").style.display = "none";
     });
-  }, (error) => {});
+  } else {
+    $("qrModal").style.display = "none";
+  }
 }
 $("btnScanQRInst").onclick = () => setupQRScanner("serialInst");
 $("btnScanQRAct").onclick = () => setupQRScanner("serialAct");
-$("btnCloseScanner").onclick = () => {
-    if (html5QrCodeScanner) {
-        html5QrCodeScanner.clear().then(() => {
-            $("qrModal").style.display = "none";
-        }).catch(err => {
-            console.error("Error al detener el escáner:", err);
-            $("qrModal").style.display = "none";
-        });
-    }
-};
+$("btnCloseScanner").onclick = closeScanner;
 
+// --- Estado Inicial de la Página ---
 document.addEventListener('DOMContentLoaded', () => {
     showSection('ficha-instalacion');
     const d=new Date();$("fecha").value=("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear();
@@ -865,6 +807,13 @@ document.addEventListener('DOMContentLoaded', () => {
     renderChips();
 });
 </script>
+
+<!-- Letras Copyright-->
+<footer style="text-align:center; color:white; margin-top:32px; font-size:0.92em; opacity:0.8;">
+  Plataforma de Reportes y Formatos - <br>
+  Versión V0.6 - Build 2025-08-20 12:00<br>
+  Todos los derechos reservados <br>
+  <Div Espiral - &copy:2025>
+</footer>
 </body>
 </html>
-
